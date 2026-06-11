@@ -1,0 +1,546 @@
+/*
+ * Abilities Hub admin styles. Mirrors Skills and Sandbox: collapsible card
+ * sections, compact rows, restrained pills, and hover-revealed row actions.
+ *
+ * Design tokens are scoped to .layrshift-hub so they cascade to every section
+ * without leaking into the rest of wp-admin.
+ */
+
+.layrshift-hub.layrshift-wrap {
+    /* Inherit LayrShift tokens from .layrshift-wrap; local aliases for hub components. */
+    --nm-text: var(--ls-ink, #0f172a);
+    --nm-text-soft: var(--ls-muted, #64748b);
+    --nm-muted: #475569;
+    --nm-muted-2: var(--ls-muted, #64748b);
+    --nm-muted-3: #94a3b8;
+    --nm-hint: #cbd5e1;
+
+    --nm-bg: var(--ls-surface, #fff);
+    --nm-bg-hover: var(--ls-border-soft, #f1f5f9);
+    --nm-bg-rail: var(--ls-amber-soft, #eff6ff);
+    --nm-row-stripe: #f8fafc;
+    --nm-row-hover: var(--ls-amber-soft, #eff6ff);
+    --nm-cat-bg: var(--ls-border-soft, #f1f5f9);
+    --nm-cat-hover: #e8f0fe;
+    --nm-border: var(--ls-border, #e2e8f0);
+    --nm-border-soft: var(--ls-border-soft, #f1f5f9);
+    --nm-border-faint: #f8fafc;
+
+    --nm-pill-bg: var(--ls-border-soft, #f1f5f9);
+    --nm-pill-text: #475569;
+    --nm-pill-mcp-bg: var(--ls-amber-soft, #eff6ff);
+    --nm-pill-mcp-text: var(--ls-amber-hover, #1d4ed8);
+    --nm-pill-on-bg: #dcfce7;
+    --nm-pill-on-text: var(--ls-success, #16a34a);
+    --nm-pill-off-bg: #fee2e2;
+    --nm-pill-off-text: var(--ls-danger, #dc2626);
+    --nm-pill-protected-bg: #fef3c7;
+    --nm-pill-protected-text: #92400e;
+
+    --nm-focus: var(--ls-amber, #2563eb);
+    --nm-radius-sm: 4px;
+    --nm-radius: 6px;
+    --nm-radius-lg: var(--ls-radius, 10px);
+    --nm-shadow: var(--ls-shadow-sm, 0 1px 2px rgba(28, 25, 23, 0.04));
+
+    --nm-space-1: 4px;
+    --nm-space-2: 8px;
+    --nm-space-3: 12px;
+    --nm-space-4: 16px;
+    --nm-space-6: 24px;
+
+    --nm-transition: 120ms ease;
+
+    padding: 20px 24px 32px;
+}
+
+.layrshift-hub .wrap-title {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--nm-space-3);
+    margin: var(--nm-space-3) 0 20px;
+}
+
+.layrshift-hub .wrap-title h1 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--nm-text);
+}
+
+.layrshift-hub .wrap-title .description {
+    max-width: 1200px;
+    margin: var(--nm-space-2) 0 0;
+    color: var(--nm-text-soft);
+}
+
+.layrshift-hub-section {
+    background: var(--nm-bg);
+    border: 1px solid var(--nm-border);
+    border-radius: var(--nm-radius-lg);
+    box-shadow: var(--nm-shadow);
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+/* Boundary between LayrShift's abilities and the other plugins' groups. */
+.layrshift-hub-divider {
+    display: flex;
+    align-items: center;
+    gap: var(--nm-space-3);
+    margin: 28px 0 var(--nm-space-3);
+    padding: 0;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--nm-muted-2);
+}
+
+.layrshift-hub-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--nm-border-soft);
+}
+
+/* Provider header (group level) */
+.layrshift-hub-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--nm-space-4) var(--nm-space-6);
+    border-bottom: 1px solid var(--nm-border-soft);
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+}
+
+.layrshift-hub-header::-webkit-details-marker {
+    display: none;
+}
+
+.layrshift-hub-header:hover {
+    background: var(--nm-bg-hover);
+}
+
+.layrshift-hub-header:focus-visible {
+    outline: 2px solid var(--nm-focus);
+    outline-offset: -2px;
+}
+
+.layrshift-hub-header::after {
+    content: "";
+    flex: none;
+    width: 7px;
+    height: 7px;
+    margin-left: var(--nm-space-3);
+    border-right: 2px solid var(--nm-muted-2);
+    border-bottom: 2px solid var(--nm-muted-2);
+    transform: rotate(-45deg);
+    transition: transform var(--nm-transition);
+}
+
+.layrshift-hub-section[open] > .layrshift-hub-header::after {
+    transform: rotate(45deg);
+}
+
+.layrshift-hub-section:not([open]) > .layrshift-hub-header {
+    border-bottom: none;
+}
+
+.layrshift-hub-header h2 {
+    margin: 0 auto 0 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--nm-text);
+    letter-spacing: -0.01em;
+}
+
+.layrshift-hub-header h2 .count {
+    margin-left: var(--nm-space-2);
+    color: var(--nm-muted-2);
+    font-weight: 400;
+    font-size: 13px;
+}
+
+/* Category sub-section */
+.layrshift-hub-subsection {
+    border-top: 1px solid var(--nm-border-faint);
+}
+
+.layrshift-hub-subsection:first-of-type {
+    border-top: none;
+}
+
+.layrshift-hub-subheader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--nm-space-2) var(--nm-space-6);
+    background: var(--nm-cat-bg);
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+}
+
+.layrshift-hub-subheader::-webkit-details-marker {
+    display: none;
+}
+
+.layrshift-hub-subheader:hover {
+    background: var(--nm-cat-hover);
+}
+
+.layrshift-hub-subheader:focus-visible {
+    outline: 2px solid var(--nm-focus);
+    outline-offset: -2px;
+}
+
+.layrshift-hub-subheader h3 {
+    margin: 0 auto 0 0;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--nm-muted-2);
+}
+
+.layrshift-hub-subheader h3 .count {
+    margin-left: var(--nm-space-2);
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--nm-muted-3);
+}
+
+.layrshift-hub-subheader::after {
+    content: "";
+    flex: none;
+    width: 6px;
+    height: 6px;
+    margin-left: var(--nm-space-3);
+    border-right: 2px solid var(--nm-muted-3);
+    border-bottom: 2px solid var(--nm-muted-3);
+    transform: rotate(-45deg);
+    transition: transform var(--nm-transition);
+}
+
+.layrshift-hub-subsection[open] > .layrshift-hub-subheader::after {
+    transform: rotate(45deg);
+}
+
+/* "All disabled" pill in a provider/category header. The base .pill rules are
+ * scoped to row pill containers, so the header variant is styled on its own. */
+.layrshift-hub-header h2 .layrshift-hub-alloff,
+.layrshift-hub-subheader h3 .layrshift-hub-alloff {
+    margin-left: var(--nm-space-2);
+    padding: 2px var(--nm-space-2);
+    border-radius: var(--nm-radius-sm);
+    background: var(--nm-pill-off-bg);
+    color: var(--nm-pill-off-text);
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.5;
+    text-transform: none;
+    letter-spacing: 0;
+    vertical-align: middle;
+}
+
+/* Select-all checkbox in section headers. The heading takes the auto margin so
+ * the chevron stays pinned right while checkbox + title group on the left. */
+.layrshift-hub-select-all {
+    display: flex;
+    align-items: center;
+    margin: 0 var(--nm-space-3) 0 0;
+}
+
+.layrshift-hub-select-all input[type="checkbox"] {
+    margin: 0;
+}
+
+/* Rows */
+.layrshift-hub-rows {
+    display: block;
+}
+
+.layrshift-hub-row {
+    display: grid;
+    grid-template-columns: 28px minmax(0, 1fr) max-content max-content;
+    align-items: center;
+    gap: var(--nm-space-3);
+    min-height: 40px;
+    padding: var(--nm-space-2) var(--nm-space-6);
+    border-bottom: 1px solid var(--nm-border-faint);
+    transition: background var(--nm-transition);
+}
+
+/* Only an expanded row needs its controls pinned to the top, next to the slug;
+ * collapsed rows (the common case) keep everything vertically centered. */
+.layrshift-hub-row:has(.layrshift-hub-main[open]) {
+    align-items: start;
+}
+
+.layrshift-hub-row:last-child {
+    border-bottom: none;
+}
+
+/* Zebra striping (restarts inside each category). The stripe is far lighter
+ * than the category bar so rows never read as headers; hover steps darker
+ * still, staying visible over both white and striped rows. */
+.layrshift-hub-row:nth-child(even) {
+    background: var(--nm-row-stripe);
+}
+
+.layrshift-hub-row:hover {
+    background: var(--nm-row-hover);
+}
+
+.layrshift-hub-row.is-off .layrshift-hub-main .slug,
+.layrshift-hub-row.is-off .layrshift-hub-main .desc {
+    color: var(--nm-muted-3);
+}
+
+/* While an AJAX toggle is in flight, dim the row and block further clicks. */
+.layrshift-hub-row.is-busy {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.layrshift-hub-select {
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+
+.layrshift-hub-select input[type="checkbox"] {
+    margin: 0;
+}
+
+.layrshift-hub-main {
+    min-width: 0;
+}
+
+.layrshift-hub-main--plain,
+.layrshift-hub-summary {
+    display: flex;
+    align-items: baseline;
+    gap: var(--nm-space-2);
+    overflow: hidden;
+    min-width: 0;
+}
+
+.layrshift-hub-summary {
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+}
+
+.layrshift-hub-summary::-webkit-details-marker {
+    display: none;
+}
+
+.layrshift-hub-summary:hover .slug {
+    text-decoration: underline;
+    text-decoration-color: var(--nm-hint);
+    text-underline-offset: 2px;
+}
+
+.layrshift-hub-summary:focus-visible {
+    outline: 2px solid var(--nm-focus);
+    outline-offset: 2px;
+}
+
+.layrshift-hub-main[open] > .layrshift-hub-summary .desc {
+    display: none;
+}
+
+.layrshift-hub-detail {
+    padding: var(--nm-space-1) 0 var(--nm-space-2);
+}
+
+.layrshift-hub-detail .desc-full {
+    margin: 0;
+    max-width: 70ch;
+    color: var(--nm-muted);
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.layrshift-hub-main .slug {
+    flex: none;
+    font-family: ui-monospace, "DM Mono", "JetBrains Mono", Consolas, monospace;
+    font-size: 12px;
+    color: var(--ls-amber-hover, #1d4ed8);
+    font-weight: 500;
+    white-space: nowrap;
+    padding: 2px 8px;
+    border-radius: var(--nm-radius-sm);
+    background: var(--nm-pill-mcp-bg);
+}
+
+.layrshift-hub-main .desc {
+    flex: 0 1 auto;
+    max-width: 70ch;
+    color: var(--nm-text);
+    font-size: 13px;
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+}
+
+.layrshift-hub-main .desc::before {
+    content: "-";
+    margin-right: 6px;
+    color: var(--nm-hint);
+}
+
+/* Pills */
+.layrshift-hub-pills {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--nm-space-1);
+    min-height: 26px;
+}
+
+.layrshift-hub-pills .pill {
+    font-size: 11px;
+    padding: 2px var(--nm-space-2);
+    border-radius: var(--nm-radius-sm);
+    background: var(--nm-pill-bg);
+    color: var(--nm-pill-text);
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.layrshift-hub-pills .pill.mcp {
+    background: var(--nm-pill-mcp-bg);
+    color: var(--nm-pill-mcp-text);
+}
+
+.layrshift-hub-pills .pill.status.is-enabled {
+    background: var(--nm-pill-on-bg);
+    color: var(--nm-pill-on-text);
+}
+
+.layrshift-hub-pills .pill.status.is-disabled {
+    background: var(--nm-pill-off-bg);
+    color: var(--nm-pill-off-text);
+}
+
+.layrshift-hub-pills .pill.protected {
+    background: var(--nm-pill-protected-bg);
+    color: var(--nm-pill-protected-text);
+}
+
+/* Row actions (revealed on hover/focus) */
+.layrshift-hub-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--nm-space-1);
+    margin: 0;
+    min-height: 26px;
+    opacity: 0;
+    transition: opacity var(--nm-transition);
+}
+
+.layrshift-hub-row:hover .layrshift-hub-actions,
+.layrshift-hub-row:focus-within .layrshift-hub-actions {
+    opacity: 1;
+}
+
+.layrshift-hub-actions form {
+    margin: 0;
+}
+
+.layrshift-hub .action-btn {
+    background: transparent;
+    border: 0;
+    padding: var(--nm-space-1) 10px;
+    border-radius: var(--nm-radius);
+    cursor: pointer;
+    color: var(--nm-muted);
+    font-size: 12px;
+    text-decoration: none;
+    line-height: 1.4;
+    transition: background var(--nm-transition), color var(--nm-transition);
+    outline: none;
+    box-shadow: none;
+}
+
+.layrshift-hub .action-btn:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.layrshift-hub .action-btn:focus-visible {
+    outline: 2px solid var(--nm-focus);
+    outline-offset: 1px;
+}
+
+.layrshift-hub .action-btn:hover,
+.layrshift-hub .action-btn:focus {
+    background: var(--nm-bg-rail);
+    color: var(--ls-amber-hover, #1d4ed8);
+}
+
+/* Bulk action toolbars */
+.layrshift-hub .tablenav {
+    height: auto;
+    margin: var(--nm-space-3) 0;
+}
+
+.layrshift-hub .tablenav.bottom {
+    margin-top: 0;
+}
+
+.layrshift-hub .bulkactions {
+    display: flex;
+    align-items: center;
+    gap: var(--nm-space-2);
+}
+
+.layrshift-hub .tablenav .button.action {
+    background: var(--ls-amber, #2563eb);
+    border-color: var(--ls-amber, #2563eb);
+    color: #fff;
+}
+
+.layrshift-hub .tablenav .button.action:hover,
+.layrshift-hub .tablenav .button.action:focus {
+    background: var(--ls-amber-hover, #1d4ed8);
+    border-color: var(--ls-amber-hover, #1d4ed8);
+    color: #fff;
+}
+
+.layrshift-hub .wrap-title .description a {
+    color: var(--ls-amber, #2563eb);
+    text-decoration: none;
+}
+
+.layrshift-hub .wrap-title .description a:hover {
+    color: var(--ls-amber-hover, #1d4ed8);
+    text-decoration: underline;
+}
+
+@media (max-width: 1200px) {
+    .layrshift-hub-row {
+        grid-template-columns: 28px minmax(0, 1fr) minmax(220px, auto);
+    }
+
+    .layrshift-hub-pills,
+    .layrshift-hub-actions {
+        grid-column: 2 / -1;
+        justify-content: flex-start;
+    }
+
+    .layrshift-hub-actions {
+        opacity: 1;
+    }
+}
