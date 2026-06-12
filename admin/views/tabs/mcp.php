@@ -200,6 +200,10 @@ $abilities_ok    = ! empty( $settings['enabled'] ) && ! empty( $settings['risk_a
 	<div class="layrshift-studio-verify">
 		<h3 class="layrshift-section-label"><?php esc_html_e( 'Verify connection', 'layrshift' ); ?></h3>
 		<p class="layrshift-mcp-creds__hint"><?php esc_html_e( 'Restart your MCP client, then ask it to run:', 'layrshift' ); ?></p>
-		<code class="layrshift-inline-code layrshift-inline-code--block">layrshift/execute-php → return get_bloginfo('name');</code>
+		<?php if ( class_exists( 'LayrShift\\Abilities\\ExecutePhp' ) ) : ?>
+			<code class="layrshift-inline-code layrshift-inline-code--block">layrshift/execute-php → return get_bloginfo('name');</code>
+		<?php else : ?>
+			<code class="layrshift-inline-code layrshift-inline-code--block">layrshift/read-file → path: wp-config.php</code>
+		<?php endif; ?>
 	</div>
 </section>

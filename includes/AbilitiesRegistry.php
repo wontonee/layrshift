@@ -16,10 +16,8 @@ use LayrShift\Abilities\DeleteFile;
 use LayrShift\Abilities\DisableFile;
 use LayrShift\Abilities\EditFile;
 use LayrShift\Abilities\EnableFile;
-use LayrShift\Abilities\ExecutePhp;
 use LayrShift\Abilities\ListDirectory;
 use LayrShift\Abilities\ReadFile;
-use LayrShift\Abilities\RunWpCli;
 use LayrShift\Abilities\WriteFile;
 use LayrShift\Blogibot\Loader as BlogibotLoader;
 use LayrShift\Elementor\Loader as ElementorLoader;
@@ -48,7 +46,9 @@ final class AbilitiesRegistry {
 		}
 
 		CreateAdminAccessLink::register();
-		RunWpCli::register();
+		if ( class_exists( 'LayrShift\\Abilities\\RunWpCli' ) ) {
+			\LayrShift\Abilities\RunWpCli::register();
+		}
 		GutenbergLoader::register_abilities();
 		ElementorLoader::register_abilities();
 		YoastLoader::register_abilities();
@@ -61,13 +61,14 @@ final class AbilitiesRegistry {
 	 * @return array<string, array<string, mixed>>
 	 */
 	public static function tool_names(): array {
+		$wp_cli = class_exists( 'LayrShift\\Abilities\\RunWpCli' )
+			? array( 'layrshift/run-wp-cli', 'layrshift/get-wp-cli-job' )
+			: array();
+
 		return array_merge(
 			array_keys( self::definitions() ),
-			array(
-				'layrshift/create-admin-access-link',
-				'layrshift/run-wp-cli',
-				'layrshift/get-wp-cli-job',
-			),
+			array( 'layrshift/create-admin-access-link' ),
+			$wp_cli,
 			GutenbergLoader::ability_names(),
 			ElementorLoader::ability_names(),
 			YoastLoader::ability_names(),
@@ -99,28 +100,7 @@ final class AbilitiesRegistry {
 			'type'   => 'tool',
 		);
 
-		return array(
-			'layrshift/execute-php' => array(
-				'label'               => __( 'Execute PHP', 'layrshift' ),
-				'description'         => __( 'Execute PHP code with full access to the WordPress environment including $wpdb, all WordPress functions, and all active plugins.', 'layrshift' ),
-				'category'            => AbilityCategories::CODE_EXECUTION,
-				'execute_callback'    => array( ExecutePhp::class, 'execute' ),
-				'permission_callback' => array( Auth::class, 'check_ability_permission' ),
-				'input_schema'        => array(
-					'type'       => 'object',
-					'properties' => array(
-						'code' => array(
-							'type'        => 'string',
-							'description' => __( 'PHP code to execute. Do not include the opening <?php tag.', 'layrshift' ),
-						),
-					),
-					'required'   => array( 'code' ),
-				),
-				'meta'                => array(
-					'mcp'         => $mcp_tool( 'execute' ),
-					'annotations' => array( 'destructive' => true ),
-				),
-			),
+		$definitions = array(
 			'layrshift/read-file' => array(
 				'label'               => __( 'Read File', 'layrshift' ),
 				'description'         => __( 'Read a file from the server filesystem.', 'layrshift' ),
@@ -272,5 +252,31 @@ final class AbilitiesRegistry {
 				'meta'                => array( 'mcp' => $mcp_tool( 'upload' ) ),
 			),
 		);
+
+		if ( class_exists( 'LayrShift\\Abilities\\ExecutePhp' ) ) {
+			$definitions['layrshift/execute-php'] = array(
+				'label'               => __( 'Execute PHP', 'layrshift' ),
+				'description'         => __( 'Execute PHP code with full access to the WordPress environment including $wpdb, all WordPress functions, and all active plugins.', 'layrshift' ),
+				'category'            => AbilityCategories::CODE_EXECUTION,
+				'execute_callback'    => array( 'LayrShift\\Abilities\\ExecutePhp', 'execute' ),
+				'permission_callback' => array( Auth::class, 'check_ability_permission' ),
+				'input_schema'        => array(
+					'type'       => 'object',
+					'properties' => array(
+						'code' => array(
+							'type'        => 'string',
+							'description' => __( 'PHP code to execute. Do not include the opening <?php tag.', 'layrshift' ),
+						),
+					),
+					'required'   => array( 'code' ),
+				),
+				'meta'                => array(
+					'mcp'         => $mcp_tool( 'execute' ),
+					'annotations' => array( 'destructive' => true ),
+				),
+			);
+		}
+
+		return $definitions;
 	}
 }

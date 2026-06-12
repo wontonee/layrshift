@@ -19,6 +19,9 @@ rsync -a \
   --exclude='.phpunit.result.cache' \
   --exclude='.cursor/' \
   --exclude='.git/' \
+  --exclude='.gitignore' \
+  --exclude='.gitattributes' \
+  --exclude='.distignore' \
   --exclude='node_modules/' \
   --exclude='create-*-landing-pages.php' \
   --exclude='composer.lock' \
@@ -30,6 +33,9 @@ rsync -a \
   --exclude='docs/plans/' \
   --exclude='README.md' \
   --exclude='assets/' \
+  --exclude='abilities/ExecutePhp.php' \
+  --exclude='abilities/RunWpCli.php' \
+  --exclude='scripts/' \
   --exclude='layrshift-*.zip' \
   --exclude='.DS_Store' \
   ./ "$STAGING/layrshift/"
@@ -37,6 +43,9 @@ rsync -a \
 test -f "$STAGING/layrshift/vendor/autoload.php"
 test ! -d "$STAGING/layrshift/.git"
 test ! -f "$STAGING/layrshift/vendor/bin/phpunit"
+test ! -f "$STAGING/layrshift/.gitignore"
+test ! -f "$STAGING/layrshift/abilities/ExecutePhp.php"
+test ! -f "$STAGING/layrshift/abilities/RunWpCli.php"
 
 cd "$STAGING"
 zip -rq "$ZIP_OUT" layrshift

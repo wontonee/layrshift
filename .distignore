@@ -3,6 +3,9 @@ phpunit.xml.dist
 .phpunit.result.cache
 .cursor/
 .git/
+.gitignore
+.gitattributes
+.distignore
 node_modules/
 create-*-landing-pages.php
 composer.lock
@@ -14,3 +17,6 @@ docs/MCP-TEST-REPORT.md
 docs/plans/
 README.md
 assets/
+abilities/ExecutePhp.php
+abilities/RunWpCli.php
+scripts/

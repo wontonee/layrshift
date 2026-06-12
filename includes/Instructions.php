@@ -64,8 +64,6 @@ final class Instructions {
 				'- Start every session with `mcp-adapter/discover-abilities`',
 				'- Dispatch tools via `mcp-adapter/execute-ability` (or call LayrShift tools directly on the LayrShift MCP server; MCP tool names use compact `ls-*` aliases, e.g. `ls-gb-enable-batch-finalization` for `layrshift/gutenberg-enable-batch-finalization`)',
 				'- PHP files you write go to `wp-content/layrshift-sandbox/` only',
-				'- Probe site state with `layrshift/execute-php` before making changes',
-				'- Run WP-CLI with `layrshift/run-wp-cli`; poll async jobs with `layrshift/get-wp-cli-job`',
 				'- Browser wp-admin access: `layrshift/create-admin-access-link` (one-time exchange)',
 				'- Gutenberg block edits: use `layrshift/gutenberg-*` abilities and keep the Block Editor Queue page open (`admin.php?page=layrshift-gutenberg-finalize`) while static blocks finalize',
 				'- Elementor edits: use `layrshift/elementor-get-document`, `layrshift/elementor-save-document`, and `layrshift/elementor-list-templates` (load the `elementor` skill first); draft-only by default',

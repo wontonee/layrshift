@@ -72,9 +72,21 @@ final class UploadEndpoint {
 			return $php_guard;
 		}
 
-		if ( ! move_uploaded_file( (string) $file['tmp_name'], $target ) ) {
+		$tmp_name = (string) ( $file['tmp_name'] ?? '' );
+		if ( '' === $tmp_name || ! is_uploaded_file( $tmp_name ) ) {
+			return new \WP_Error( 'layrshift_invalid_upload', __( 'Invalid uploaded file.', 'layrshift' ), array( 'status' => 400 ) );
+		}
+
+		$contents = file_get_contents( $tmp_name );
+		if ( false === $contents ) {
+			return new \WP_Error( 'layrshift_read_failed', __( 'Could not read uploaded file.', 'layrshift' ), array( 'status' => 500 ) );
+		}
+
+		if ( false === file_put_contents( $target, $contents ) ) {
 			return new \WP_Error( 'layrshift_move_failed', __( 'Could not save uploaded file.', 'layrshift' ), array( 'status' => 500 ) );
 		}
+
+		@unlink( $tmp_name );
 
 		return rest_ensure_response(
 			array(
