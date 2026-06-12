@@ -9,6 +9,7 @@ declare( strict_types=1 );
 
 namespace LayrShift\Api;
 
+use LayrShift\AbilityPolicy;
 use LayrShift\Pro\EditorDetector;
 use LayrShift\Pro\ProSettings;
 use LayrShift\Pro\TemplateGenerator;
@@ -98,7 +99,7 @@ final class TemplateStudioEndpoint {
 	}
 
 	public static function can_manage_templates(): bool {
-		return current_user_can( 'manage_options' ) && current_user_can( 'edit_posts' );
+		return AbilityPolicy::check_rest_permission() && current_user_can( 'edit_posts' );
 	}
 
 	/**

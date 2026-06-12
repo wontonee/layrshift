@@ -35,8 +35,8 @@ final class Logger {
 			'ip'               => self::get_client_ip(),
 			'execution_time_ms'=> round( $duration_ms, 2 ),
 			'status'           => $success ? 'success' : 'error',
-			'input'            => self::truncate( wp_json_encode( $input ) ?: '' ),
-			'output'           => self::truncate( is_string( $output ) ? $output : ( wp_json_encode( $output ) ?: '' ) ),
+			'input'            => self::truncate( wp_json_encode( self::redact_input( $input, $ability ) ) ?: '' ),
+			'output'           => self::truncate( self::redact_output( $output, $ability ) ),
 		);
 
 		if ( count( $entries ) > self::MAX_ENTRIES ) {
@@ -56,6 +56,49 @@ final class Logger {
 
 	public static function clear(): void {
 		delete_option( self::OPTION_KEY );
+	}
+
+	/**
+	 * @param array<string, mixed> $input
+	 * @return array<string, mixed>
+	 */
+	private static function redact_input( array $input, string $ability ): array {
+		$sensitive = array( 'password', 'token', 'gemini_api_key', 'api_key', 'secret' );
+		$redacted  = $input;
+
+		foreach ( $sensitive as $key ) {
+			if ( array_key_exists( $key, $redacted ) ) {
+				$redacted[ $key ] = '[redacted]';
+			}
+		}
+
+		if ( 'layrshift/execute-php' === $ability && isset( $redacted['code'] ) ) {
+			$redacted['code'] = '[redacted]';
+		}
+
+		return $redacted;
+	}
+
+	private static function redact_output( $output, string $ability ): string {
+		unset( $ability );
+
+		if ( is_string( $output ) ) {
+			return self::redact_secrets_in_string( $output );
+		}
+
+		$encoded = wp_json_encode( $output );
+		if ( ! is_string( $encoded ) ) {
+			return '';
+		}
+
+		return self::redact_secrets_in_string( $encoded );
+	}
+
+	private static function redact_secrets_in_string( string $value ): string {
+		$value = (string) preg_replace( '/"token"\s*:\s*"[^"]*"/i', '"token":"[redacted]"', $value );
+		$value = (string) preg_replace( '/"password"\s*:\s*"[^"]*"/i', '"password":"[redacted]"', $value );
+
+		return $value;
 	}
 
 	private static function truncate( string $value, int $max = 2000 ): string {

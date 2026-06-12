@@ -7,6 +7,8 @@ declare(strict_types=1);
 
 namespace LayrShift\Admin\GutenbergFinalizer;
 
+use LayrShift\Admin\Admin;
+
 if (!defined('ABSPATH')) {
     exit();
 }
@@ -29,7 +31,7 @@ function register_gutenberg_finalizer_menu(): void
     }
 
     add_submenu_page(
-        parent_slug: 'layrshift',
+        parent_slug: Admin::APP_PAGE,
         page_title: __('Block Editor Queue', 'layrshift'),
         menu_title: __('Block Editor Queue', 'layrshift'),
         capability: 'edit_posts',

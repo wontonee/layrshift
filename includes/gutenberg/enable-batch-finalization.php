@@ -20,7 +20,7 @@ wp_register_ability('layrshift/gutenberg-enable-batch-finalization', [
         'Marks a draft Gutenberg pending batch ready after all target changes are queued. If the Block Editor Queue page is open, it can pick up the batch automatically; otherwise the response tells the agent to ask the user to open the generic Block Editor Queue page. The response also includes token-gated SSE and poll URLs agents can watch with curl. Browser-serialized items are staged first; queued changes are still not live until the whole batch commits and reports finalized.',
         'layrshift',
     ),
-    'category' => 'gutenberg',
+    'category' => 'layrshift-gutenberg',
     'input_schema' => [
         'type' => 'object',
         'properties' => [

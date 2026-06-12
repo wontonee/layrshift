@@ -17,7 +17,9 @@ use LayrShift\Sandbox;
 
 final class Admin {
 
-	public const APP_PAGE = 'layrshift';
+	public const APP_PAGE = 'layrshift-app';
+
+	public const LEGACY_APP_PAGE = 'layrshift';
 
 	private const ALLOWED_TABS = array( 'mcp', 'settings' );
 
@@ -26,7 +28,7 @@ final class Admin {
 		AbilitiesHub::init();
 		add_action( 'admin_menu', array( self::class, 'register_menus' ), 5 );
 		add_action( 'admin_init', array( self::class, 'register_settings' ) );
-		add_action( 'admin_init', array( self::class, 'redirect_legacy_slugs' ) );
+		add_action( 'admin_init', array( self::class, 'redirect_legacy_slugs' ), 0 );
 		add_action( 'admin_enqueue_scripts', array( self::class, 'enqueue_assets' ) );
 		add_filter( 'admin_body_class', array( self::class, 'admin_body_class' ) );
 		add_action( 'admin_post_layrshift_sandbox_action', array( self::class, 'handle_sandbox_action' ) );
@@ -84,6 +86,17 @@ final class Admin {
 			'layrshift-log',
 			array( self::class, 'render_log' )
 		);
+
+		// Back-compat: old bookmarks and links using page=layrshift still resolve.
+		add_submenu_page(
+			self::APP_PAGE,
+			__( 'LayrShift', 'layrshift' ),
+			'',
+			'manage_options',
+			self::LEGACY_APP_PAGE,
+			array( self::class, 'render_app' )
+		);
+		remove_submenu_page( self::APP_PAGE, self::LEGACY_APP_PAGE );
 	}
 
 	public static function redirect_legacy_slugs(): void {
@@ -96,12 +109,19 @@ final class Admin {
 		$page = sanitize_key( (string) ( $_GET['page'] ?? '' ) );
 
 		$legacy_map = array(
+			self::LEGACY_APP_PAGE       => self::APP_PAGE,
 			'layrshift-template-studio' => 'mcp',
 			'layrshift-connect'         => 'mcp',
 		);
 
 		if ( isset( $legacy_map[ $page ] ) ) {
-			wp_safe_redirect( admin_url( 'admin.php?page=' . self::APP_PAGE . '&tab=' . $legacy_map[ $page ] ) );
+			$target = $legacy_map[ $page ];
+			if ( self::LEGACY_APP_PAGE === $page ) {
+				$tab = isset( $_GET['tab'] ) ? sanitize_key( (string) $_GET['tab'] ) : '';
+				wp_safe_redirect( self::app_url( $tab ) );
+				exit;
+			}
+			wp_safe_redirect( self::app_url( $target ) );
 			exit;
 		}
 
@@ -119,6 +139,20 @@ final class Admin {
 		}
 	}
 
+	public static function is_app_page( string $page ): bool {
+		return in_array( $page, array( self::APP_PAGE, self::LEGACY_APP_PAGE ), true );
+	}
+
+	public static function app_url( string $tab = '' ): string {
+		$args = array( 'page' => self::APP_PAGE );
+		$tab  = sanitize_key( $tab );
+		if ( '' !== $tab && in_array( $tab, self::ALLOWED_TABS, true ) ) {
+			$args['tab'] = $tab;
+		}
+
+		return add_query_arg( $args, admin_url( 'admin.php' ) );
+	}
+
 	public static function get_active_tab(): string {
 		$tab = sanitize_key( (string) ( $_GET['tab'] ?? 'mcp' ) );
 
@@ -126,7 +160,10 @@ final class Admin {
 	}
 
 	private static function is_app_screen( \WP_Screen $screen ): bool {
-		return false !== strpos( (string) $screen->id, self::APP_PAGE );
+		$id = (string) $screen->id;
+
+		return false !== strpos( $id, self::APP_PAGE )
+			|| str_ends_with( $id, '_page_' . self::LEGACY_APP_PAGE );
 	}
 
 	public static function register_settings(): void {
@@ -192,7 +229,7 @@ final class Admin {
 			true
 		);
 
-		if ( false !== strpos( $hook, self::APP_PAGE ) && 'mcp' === self::get_active_tab() ) {
+		if ( self::is_app_admin_hook( $hook ) && 'mcp' === self::get_active_tab() ) {
 			wp_enqueue_script(
 				'layrshift-mcp-connect',
 				LAYRSHIFT_URL . 'admin/assets/mcp-connect.js',
@@ -216,6 +253,11 @@ final class Admin {
 		echo '<div class="notice notice-error"><p><strong>LayrShift:</strong> ';
 		echo esc_html( implode( ' ', $errors ) );
 		echo '</p></div>';
+	}
+
+	private static function is_app_admin_hook( string $hook ): bool {
+		return false !== strpos( $hook, self::APP_PAGE )
+			|| str_ends_with( $hook, '_page_' . self::LEGACY_APP_PAGE );
 	}
 
 	public static function render_app(): void {

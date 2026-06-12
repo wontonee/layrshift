@@ -192,7 +192,7 @@ final class AbilitiesHub {
 						printf(
 							/* translators: %s: settings page link */
 							esc_html__( 'Manage every ability exposed to AI agents. Disabled abilities are removed from MCP discovery while AI Abilities are enabled on the %s tab.', 'layrshift' ),
-							'<a href="' . esc_url( admin_url( 'admin.php?page=layrshift&tab=settings' ) ) . '">' . esc_html__( 'Settings', 'layrshift' ) . '</a>'
+							'<a href="' . esc_url( Admin::app_url( 'settings' ) ) . '">' . esc_html__( 'Settings', 'layrshift' ) . '</a>'
 						);
 						?>
 					</p>

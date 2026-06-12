@@ -16,9 +16,9 @@ final class Cpt {
 
 	public const POST_TYPE = 'layrshift_skill';
 
-	public const META_ENABLE_PROMPT = '_enable_prompt';
+	public const META_ENABLE_PROMPT = '_layrshift_enable_prompt';
 
-	public const META_ENABLE_AGENTIC = '_enable_agentic';
+	public const META_ENABLE_AGENTIC = '_layrshift_enable_agentic';
 
 	public static function register(): void {
 		register_post_type(

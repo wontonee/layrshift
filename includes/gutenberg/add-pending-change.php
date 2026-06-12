@@ -20,7 +20,7 @@ wp_register_ability('layrshift/gutenberg-add-pending-change', [
         'Adds one replace-content target change to a draft Gutenberg pending batch, or auto-creates a draft batch when batch_id is omitted. Static/native blocks are finalized in a hidden editor iframe so registered third-party blocks can be serialized by their editor JavaScript. Queued changes are not live until gutenberg-enable-batch-finalization marks the batch ready and an open Block Editor Queue page completes it.',
         'layrshift',
     ),
-    'category' => 'gutenberg',
+    'category' => 'layrshift-gutenberg',
     'input_schema' => [
         'type' => 'object',
         'properties' => [

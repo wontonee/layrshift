@@ -23,6 +23,10 @@ final class PathHelper {
 			return new \WP_Error( 'layrshift_empty_path', __( 'Path cannot be empty.', 'layrshift' ) );
 		}
 
+		if ( self::contains_traversal( $path ) ) {
+			return new \WP_Error( 'layrshift_traversal', __( 'Path traversal is not allowed.', 'layrshift' ) );
+		}
+
 		if ( ! self::is_absolute( $path ) ) {
 			$path = trailingslashit( ABSPATH ) . ltrim( $path, '/\\' );
 		}
@@ -36,11 +40,21 @@ final class PathHelper {
 			return new \WP_Error( 'layrshift_blocked_path', __( 'Access to this path is not allowed.', 'layrshift' ) );
 		}
 
+		if ( ! self::is_within_abspath( $real ) ) {
+			return new \WP_Error( 'layrshift_outside_abspath', __( 'Access outside the WordPress site root is not allowed.', 'layrshift' ) );
+		}
+
 		return $real;
 	}
 
 	public static function is_php_file( string $path ): bool {
-		return 'php' === strtolower( pathinfo( $path, PATHINFO_EXTENSION ) );
+		return self::is_executable_extension( $path );
+	}
+
+	public static function is_executable_extension( string $path ): bool {
+		$ext = strtolower( pathinfo( $path, PATHINFO_EXTENSION ) );
+
+		return in_array( $ext, array( 'php', 'phtml', 'php3', 'php4', 'php5', 'phar' ), true );
 	}
 
 	public static function is_sandbox_path( string $path ): bool {
@@ -54,7 +68,7 @@ final class PathHelper {
 	}
 
 	public static function assert_php_write_allowed( string $path ) {
-		if ( ! self::is_php_file( $path ) ) {
+		if ( ! self::is_executable_extension( $path ) ) {
 			return true;
 		}
 
@@ -119,6 +133,29 @@ final class PathHelper {
 		}
 
 		return (bool) preg_match( '/^[A-Za-z]:[\\\\\\/]/', $path );
+	}
+
+	private static function is_within_abspath( string $path ): bool {
+		$base = trailingslashit( wp_normalize_path( ABSPATH ) );
+		$path = wp_normalize_path( $path );
+
+		return str_starts_with( $path, $base ) || $path === rtrim( $base, '/' );
+	}
+
+	private static function contains_traversal( string $path ): bool {
+		$normalized = wp_normalize_path( $path );
+
+		if ( '..' === $normalized ) {
+			return true;
+		}
+
+		foreach ( explode( '/', $normalized ) as $segment ) {
+			if ( '..' === $segment ) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	private static function is_blocked_system_path( string $path ): bool {

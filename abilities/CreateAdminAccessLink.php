@@ -9,6 +9,7 @@ declare( strict_types=1 );
 
 namespace LayrShift\Abilities;
 
+use LayrShift\AbilityCategories;
 use LayrShift\AbilityHelpers;
 use LayrShift\Api\AdminAccessEndpoint;
 use LayrShift\Auth;
@@ -27,7 +28,7 @@ final class CreateAdminAccessLink {
 			array(
 				'label'               => __( 'Create Admin Access Link', 'layrshift' ),
 				'description'         => __( 'Creates a temporary, one-time WordPress admin access exchange for browser automation tools.', 'layrshift' ),
-				'category'            => 'admin-access',
+				'category'            => AbilityCategories::ADMIN_ACCESS,
 				'execute_callback'    => array( self::class, 'execute' ),
 				'permission_callback' => array( Auth::class, 'check_ability_permission' ),
 				'input_schema'        => array(

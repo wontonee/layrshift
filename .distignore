@@ -1,0 +1,16 @@
+tests/
+phpunit.xml.dist
+.phpunit.result.cache
+.cursor/
+.git/
+node_modules/
+create-*-landing-pages.php
+composer.lock
+admin/views/tabs/generate.php
+admin/views/tabs/preview.php
+admin/assets/template-studio.js
+tests/mcp-capability-matrix-results.json
+docs/MCP-TEST-REPORT.md
+docs/plans/
+README.md
+assets/

@@ -19,7 +19,7 @@ wp_register_ability('layrshift/gutenberg-delete-pending-change', [
         'Cancels one Gutenberg pending item without touching target content. The MVP batch page does not expose per-item cancellation, but agents can use this ability for recovery.',
         'layrshift',
     ),
-    'category' => 'gutenberg',
+    'category' => 'layrshift-gutenberg',
     'input_schema' => [
         'type' => 'object',
         'properties' => [

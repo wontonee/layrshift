@@ -20,7 +20,7 @@ wp_register_ability('layrshift/gutenberg-write-content', [
         'Directly writes Gutenberg post_content only when every supplied block is a registered Novamira-owned dynamic-only block. Native/static Gutenberg blocks require browser JS finalization; queue them with gutenberg-add-pending-change, then call gutenberg-enable-batch-finalization and send the finalization link to the user.',
         'layrshift',
     ),
-    'category' => 'gutenberg',
+    'category' => 'layrshift-gutenberg',
     'input_schema' => [
         'type' => 'object',
         'properties' => [

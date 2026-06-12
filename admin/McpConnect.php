@@ -33,7 +33,7 @@ final class McpConnect {
 		}
 
 		$page = sanitize_key( (string) ( $_GET['page'] ?? '' ) );
-		if ( Admin::APP_PAGE !== $page ) {
+		if ( ! Admin::is_app_page( $page ) ) {
 			return;
 		}
 
@@ -140,13 +140,18 @@ final class McpConnect {
 	public static function get_mcp_server_name_default(): string {
 		/** @var string $site_host */
 		$site_host = wp_parse_url( home_url(), PHP_URL_HOST ) ?? 'wordpress';
-		$site_slug = (string) preg_replace( '/^www\./', '', $site_host );
-		$site_slug = (string) preg_replace( '/[^a-z0-9-]+/', '-', strtolower( $site_slug ) );
-		$site_slug = trim( $site_slug, '-' );
-		$site_slug = substr( $site_slug, 0, 16 );
-		$site_slug = rtrim( $site_slug, '-' );
+		$site_host = (string) preg_replace( '/^www\./', '', $site_host );
+		$label     = strtolower( (string) ( explode( '.', $site_host )[0] ?? 'wp' ) );
+		$label     = (string) preg_replace( '/[^a-z0-9-]+/', '-', $label );
+		$label     = trim( $label, '-' );
+		$label     = substr( $label, 0, 8 );
+		$label     = rtrim( $label, '-' );
 
-		return 'layrshift-' . $site_slug;
+		if ( '' === $label ) {
+			$label = 'wp';
+		}
+
+		return 'ls-' . $label;
 	}
 
 	public static function likely_self_signed_https(): bool {

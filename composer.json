@@ -1,6 +1,7 @@
 {
     "name": "wontonee/layrshift",
     "description": "LayrShift — MCP server for AI agents to build inside WordPress (dev/staging only).",
+    "version": "1.0.0",
     "type": "wordpress-plugin",
     "license": "GPL-2.0-or-later",
     "authors": [

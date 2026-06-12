@@ -12,12 +12,12 @@ namespace LayrShift;
 use LayrShift\Abilities\DiscoverAbilities;
 use LayrShift\AbilityPolicy;
 use LayrShift\Admin\Admin;
+use LayrShift\Admin\AdminBar;
 use LayrShift\Api\AdminAccessEndpoint;
 use LayrShift\Api\ServerFactory;
 use LayrShift\Api\TemplateStudioEndpoint;
 use LayrShift\Api\UploadEndpoint;
 use LayrShift\Gutenberg\Loader as GutenbergLoader;
-use LayrShift\Pro\ProSettings;
 use LayrShift\Skills\Bootstrap as SkillsBootstrap;
 
 /**
@@ -35,6 +35,7 @@ final class Plugin {
 	}
 
 	private function __construct() {
+		Upgrade::init();
 		CrashRecovery::init();
 		Sandbox::init();
 		McpBootstrap::init();
@@ -44,7 +45,6 @@ final class Plugin {
 
 		add_action( 'init', array( $this, 'on_init' ) );
 		add_action( 'rest_api_init', array( $this, 'bootstrap_mcp_adapter' ), 14 );
-		add_action( 'wp_abilities_api_categories_init', array( AbilitiesRegistry::class, 'register_category' ) );
 		add_action( 'wp_abilities_api_init', array( AbilitiesRegistry::class, 'register' ) );
 		add_action( 'wp_abilities_api_init', array( DiscoverAbilities::class, 'register' ), 100 );
 		add_action( 'mcp_adapter_init', array( ServerFactory::class, 'register' ) );
@@ -55,6 +55,8 @@ final class Plugin {
 		if ( is_admin() ) {
 			Admin::init();
 		}
+
+		AdminBar::init();
 	}
 
 	/**
@@ -168,21 +170,84 @@ final class Plugin {
 		return ! empty( $settings['enabled'] ) && ! empty( $settings['risk_acknowledged'] );
 	}
 
-	public static function meets_requirements(): bool {
+	public static function enable_abilities(): bool {
+		if ( null !== self::get_dependency_error() ) {
+			return false;
+		}
+
+		$settings                        = self::get_settings();
+		$settings['enabled']             = true;
+		$settings['risk_acknowledged']   = true;
+		self::save_settings( $settings );
+
+		return true;
+	}
+
+	public static function disable_abilities(): bool {
+		$settings              = self::get_settings();
+		$settings['enabled']   = false;
+		self::save_settings( $settings );
+
+		return true;
+	}
+
+	public static function get_dependency_error(): ?string {
 		global $wp_version;
 
 		if ( version_compare( $wp_version, '6.9', '<' ) ) {
-			return false;
+			return __( 'WordPress 6.9 or newer is required.', 'layrshift' );
 		}
 
 		if ( ! function_exists( 'wp_register_ability' ) ) {
-			return false;
+			return __( 'WordPress Abilities API is not available.', 'layrshift' );
 		}
 
 		if ( ! class_exists( \WP\MCP\Core\McpAdapter::class ) ) {
-			return false;
+			return __( 'MCP Adapter is not available.', 'layrshift' );
 		}
 
-		return true;
+		return null;
+	}
+
+	/**
+	 * @return array{
+	 *     state: string,
+	 *     configured: bool,
+	 *     active: bool,
+	 *     can_enable: bool,
+	 *     dependency_error: string|null
+	 * }
+	 */
+	public static function get_abilities_status(): array {
+		$configured      = self::is_abilities_enabled();
+		$dependency_error = self::get_dependency_error();
+		$https_blocked   = Auth::is_https_required_and_missing();
+
+		if ( $https_blocked && null === $dependency_error ) {
+			$dependency_error = __( 'HTTPS is required but this site is not served over SSL.', 'layrshift' );
+		}
+
+		$runtime_ok = null === $dependency_error && ! $https_blocked;
+		$active     = $configured && $runtime_ok;
+		$error      = $configured && ! $runtime_ok;
+
+		$state = 'off';
+		if ( $active ) {
+			$state = 'on';
+		} elseif ( $error ) {
+			$state = 'error';
+		}
+
+		return array(
+			'state'            => $state,
+			'configured'       => $configured,
+			'active'           => $active,
+			'can_enable'       => $configured || null === self::get_dependency_error(),
+			'dependency_error' => $dependency_error,
+		);
+	}
+
+	public static function meets_requirements(): bool {
+		return null === self::get_dependency_error();
 	}
 }

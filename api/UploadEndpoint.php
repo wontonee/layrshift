@@ -9,6 +9,8 @@ declare( strict_types=1 );
 
 namespace LayrShift\Api;
 
+use LayrShift\AbilityHelpers;
+use LayrShift\PathHelper;
 use LayrShift\UploadToken;
 
 final class UploadEndpoint {
@@ -29,9 +31,13 @@ final class UploadEndpoint {
 	 * @return \WP_REST_Response|\WP_Error
 	 */
 	public static function handle_upload( \WP_REST_Request $request ) {
-		$token = sanitize_text_field( (string) $request->get_param( 'token' ) );
+		$token = AbilityHelpers::rest_header_token( $request, 'x-layrshift-upload-token' );
 		if ( '' === $token ) {
-			return new \WP_Error( 'layrshift_missing_token', __( 'Upload token is required.', 'layrshift' ), array( 'status' => 400 ) );
+			return new \WP_Error(
+				'layrshift_missing_token',
+				__( 'Upload token is required in the X-LayrShift-Upload-Token request header.', 'layrshift' ),
+				array( 'status' => 400 )
+			);
 		}
 
 		$payload = UploadToken::consume( $token );
@@ -60,6 +66,11 @@ final class UploadEndpoint {
 
 		$filename = sanitize_file_name( basename( (string) $file['name'] ) );
 		$target   = trailingslashit( $dest_dir ) . $filename;
+
+		$php_guard = PathHelper::assert_php_write_allowed( $target );
+		if ( is_wp_error( $php_guard ) ) {
+			return $php_guard;
+		}
 
 		if ( ! move_uploaded_file( (string) $file['tmp_name'], $target ) ) {
 			return new \WP_Error( 'layrshift_move_failed', __( 'Could not save uploaded file.', 'layrshift' ), array( 'status' => 500 ) );

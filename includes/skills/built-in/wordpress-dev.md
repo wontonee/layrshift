@@ -39,17 +39,36 @@ return array(
 | WP-CLI | `layrshift/run-wp-cli`, `layrshift/get-wp-cli-job` |
 | Browser admin | `layrshift/create-admin-access-link` |
 
-## Gutenberg block editor
+## Specialized skills (load first)
 
-For posts/pages using static Gutenberg blocks:
+When the stack matches, call `layrshift/skill-get` **before** improvising:
 
-1. `layrshift/gutenberg-get-finalizer-runtime` — check Block Editor Queue is online
-2. `layrshift/gutenberg-get-content` — read live content + pending summary
-3. `layrshift/gutenberg-add-pending-change` — queue block replacements
-4. `layrshift/gutenberg-enable-batch-finalization` — mark batch ready
-5. Keep `admin.php?page=layrshift-gutenberg-finalize` open until batch is `finalized`
+| Stack | Skill slug |
+|---|---|
+| Gutenberg / blocks | `gutenberg-edit-content` |
+| Elementor | `elementor` |
+| Bricks | `bricks` |
+| WooCommerce | `woocommerce` |
+| ACF | `acf` |
+| JetEngine | `jetengine` |
+| Meta Box | `meta-box` |
+| Pods | `pods` |
+| GeneratePress | `generatepress` |
+| Kadence | `kadence` |
+| Divi / Divi 5 / Theme Builder | `divi` (Divi 5 module tree; load before header/footer edits) |
+| Breakdance | `breakdance` |
+| WPBakery | `wpbakery` |
+| Etch | `etch` |
+| Mosaic | `mosaic` |
+| ACPT | `acpt` |
+| ASE | `ase` |
+| Code Snippets / WPCode | `code-snippets` |
+| Yoast SEO | `yoast` |
+| Smush | `smush` |
+| VaultShift | `vaultshift` |
+| BlogiBot | `blogibot` |
 
-Use `layrshift/gutenberg-list-pending-batches` and `layrshift/gutenberg-get-pending-batch` to monitor status.
+Full catalog: `wp-content/plugins/layrshift/docs/SKILLS-CATALOG.md`
 
 PHP files you create must go to `wp-content/layrshift-sandbox/`. Theme and plugin PHP edits use `edit-file` on the real paths.
 

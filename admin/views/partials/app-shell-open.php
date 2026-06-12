@@ -11,6 +11,8 @@
 
 defined( 'ABSPATH' ) || exit;
 
+use LayrShift\Admin\Admin;
+
 $active_tab = $active_tab ?? 'mcp';
 $shell_mode = $shell_mode ?? 'app';
 $dev_title  = $dev_title ?? '';
@@ -34,7 +36,7 @@ $tab_body_class = 'layrshift-tab-' . sanitize_html_class( $active_tab );
 				<?php endif; ?>
 			</div>
 			<?php if ( 'dev' === $shell_mode ) : ?>
-				<a class="layrshift-app__back" href="<?php echo esc_url( admin_url( 'admin.php?page=layrshift&tab=settings' ) ); ?>">
+				<a class="layrshift-app__back" href="<?php echo esc_url( Admin::app_url( 'settings' ) ); ?>">
 					<?php esc_html_e( '← Back to Settings', 'layrshift' ); ?>
 				</a>
 			<?php endif; ?>
@@ -44,7 +46,7 @@ $tab_body_class = 'layrshift-tab-' . sanitize_html_class( $active_tab );
 				<?php foreach ( $tabs as $slug => $label ) : ?>
 					<a
 						class="layrshift-tabs__item<?php echo $slug === $active_tab ? ' is-active' : ''; ?>"
-						href="<?php echo esc_url( admin_url( 'admin.php?page=layrshift&tab=' . $slug ) ); ?>"
+						href="<?php echo esc_url( Admin::app_url( $slug ) ); ?>"
 						<?php echo $slug === $active_tab ? ' aria-current="page"' : ''; ?>
 					><?php echo esc_html( $label ); ?></a>
 				<?php endforeach; ?>

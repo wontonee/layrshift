@@ -9,6 +9,7 @@ declare( strict_types=1 );
 
 namespace LayrShift\Abilities;
 
+use LayrShift\AbilityCategories;
 use LayrShift\Auth;
 use LayrShift\Instructions;
 use LayrShift\Plugin;
@@ -37,7 +38,7 @@ final class DiscoverAbilities {
 			array(
 				'label'               => __( 'Discover Abilities', 'layrshift' ),
 				'description'         => __( 'Discover all available WordPress abilities, plus LayrShift environment instructions.', 'layrshift' ),
-				'category'            => 'mcp-adapter',
+				'category'            => AbilityCategories::MCP_ADAPTER,
 				'execute_callback'    => array( self::class, 'execute' ),
 				'permission_callback' => array( self::class, 'check_permission' ),
 				'output_schema'       => array(
@@ -81,21 +82,8 @@ final class DiscoverAbilities {
 	 * @return bool|\WP_Error
 	 */
 	public static function check_permission(): bool|\WP_Error {
-		if ( ! is_user_logged_in() ) {
-			return new \WP_Error( 'authentication_required', __( 'User must be authenticated.', 'layrshift' ) );
-		}
-
-		/** @var string $cap */
-		$cap = apply_filters( 'mcp_adapter_discover_abilities_capability', 'read' );
-		if ( ! current_user_can( $cap ) ) {
-			return new \WP_Error(
-				'insufficient_capability',
-				sprintf(
-					/* translators: %s: capability name */
-					__( 'User lacks required capability: %s', 'layrshift' ),
-					$cap
-				)
-			);
+		if ( ! Auth::check_ability_permission() ) {
+			return new \WP_Error( 'authentication_required', __( 'User must be authenticated with LayrShift abilities enabled.', 'layrshift' ) );
 		}
 
 		return true;

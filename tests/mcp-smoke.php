@@ -21,7 +21,7 @@ update_option(
 		'enabled'                => true,
 		'allowed_user_ids'       => array(),
 		'exec_time_limit'        => 30,
-		'https_enforcement'      => true,
+		'https_enforcement'      => false,
 		'restrict_core_deletion' => true,
 		'risk_acknowledged'      => true,
 	)
@@ -47,7 +47,7 @@ if ( is_wp_error( $password ) ) {
 
 $app_password = $password[0];
 $auth         = base64_encode( $user->user_login . ':' . $app_password );
-$endpoint     = 'https://wptestings.test/wp-json/layrshift/v1/mcp';
+$endpoint     = rest_url( 'layrshift/v1/mcp' );
 
 echo "User: {$user->user_login}\n";
 echo "Endpoint: {$endpoint}\n";
@@ -143,7 +143,7 @@ $execute = layrshift_mcp_post(
 		'id'      => 3,
 		'method'  => 'tools/call',
 		'params'  => array(
-			'name'      => 'layrshift-execute-php',
+			'name'      => 'ls-execute-php',
 			'arguments' => array(
 				'code' => 'return get_bloginfo("name");',
 			),

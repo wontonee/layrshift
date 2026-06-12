@@ -39,7 +39,7 @@ $abilities_ok    = ! empty( $settings['enabled'] ) && ! empty( $settings['risk_a
 		<li class="<?php echo $abilities_ok ? 'is-ok' : 'is-fail'; ?>">
 			<?php esc_html_e( 'AI Abilities enabled in Settings', 'layrshift' ); ?>
 			<?php if ( ! $abilities_ok ) : ?>
-				— <a href="<?php echo esc_url( admin_url( 'admin.php?page=layrshift&tab=settings' ) ); ?>"><?php esc_html_e( 'Open Settings', 'layrshift' ); ?></a>
+				— <a href="<?php echo esc_url( \LayrShift\Admin\Admin::app_url( 'settings' ) ); ?>"><?php esc_html_e( 'Open Settings', 'layrshift' ); ?></a>
 			<?php endif; ?>
 		</li>
 		<li class="is-ok">
@@ -88,7 +88,7 @@ $abilities_ok    = ! empty( $settings['enabled'] ) && ! empty( $settings['risk_a
 			<div class="layrshift-callout layrshift-callout--info"><?php esc_html_e( 'Password accepted and embedded in the config below.', 'layrshift' ); ?></div>
 		<?php endif; ?>
 
-		<form method="post" action="<?php echo esc_url( admin_url( 'admin.php?page=layrshift&tab=mcp' ) ); ?>" class="layrshift-mcp-creds__form">
+		<form method="post" action="<?php echo esc_url( \LayrShift\Admin\Admin::app_url( 'mcp' ) ); ?>" class="layrshift-mcp-creds__form">
 			<?php wp_nonce_field( 'layrshift_create_password' ); ?>
 			<div class="layrshift-field">
 				<label for="layrshift-password-name"><?php esc_html_e( 'Password label (optional)', 'layrshift' ); ?></label>
@@ -117,7 +117,7 @@ $abilities_ok    = ! empty( $settings['enabled'] ) && ! empty( $settings['risk_a
 				<?php esc_html_e( 'I already have an application password', 'layrshift' ); ?>
 			</button>
 			<div id="layrshift-use-existing-field" class="layrshift-mcp-creds__existing-panel" <?php echo $existing_open ? '' : 'hidden'; ?>>
-				<form method="post" action="<?php echo esc_url( admin_url( 'admin.php?page=layrshift&tab=mcp' ) ); ?>">
+				<form method="post" action="<?php echo esc_url( \LayrShift\Admin\Admin::app_url( 'mcp' ) ); ?>">
 					<?php wp_nonce_field( 'layrshift_use_existing_password' ); ?>
 					<div class="layrshift-field">
 						<label for="layrshift-existing-password"><?php esc_html_e( 'Paste password value', 'layrshift' ); ?></label>
@@ -174,7 +174,7 @@ $abilities_ok    = ! empty( $settings['enabled'] ) && ! empty( $settings['risk_a
 									<td><?php echo esc_html( $created ); ?></td>
 									<td><?php echo esc_html( $last_used ); ?></td>
 									<td>
-										<form method="post" action="<?php echo esc_url( admin_url( 'admin.php?page=layrshift&tab=mcp' ) ); ?>" onsubmit="return confirm('<?php echo esc_js( __( 'Revoke this password? Clients using it will lose access.', 'layrshift' ) ); ?>');">
+										<form method="post" action="<?php echo esc_url( \LayrShift\Admin\Admin::app_url( 'mcp' ) ); ?>" onsubmit="return confirm('<?php echo esc_js( __( 'Revoke this password? Clients using it will lose access.', 'layrshift' ) ); ?>');">
 											<input type="hidden" name="layrshift_revoke_uuid" value="<?php echo esc_attr( $uuid ); ?>" />
 											<input type="hidden" name="_wpnonce" value="<?php echo esc_attr( $revoke_nonce ); ?>" />
 											<button type="submit" name="layrshift_revoke_password" class="layrshift-btn layrshift-btn--secondary layrshift-btn--small"><?php esc_html_e( 'Revoke', 'layrshift' ); ?></button>

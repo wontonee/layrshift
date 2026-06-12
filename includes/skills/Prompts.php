@@ -9,6 +9,7 @@ declare( strict_types=1 );
 
 namespace LayrShift\Skills;
 
+use LayrShift\AbilityCategories;
 use LayrShift\Auth;
 
 /**
@@ -49,7 +50,7 @@ final class Prompts {
 				array(
 					'label'               => $name,
 					'description'         => $description,
-					'category'            => 'skill',
+					'category'            => AbilityCategories::SKILL,
 					'input_schema'        => array(
 						'type'       => 'object',
 						'properties' => new \stdClass(),

@@ -10,6 +10,7 @@ declare( strict_types=1 );
 namespace LayrShift;
 
 use LayrShift\Abilities\CreateAdminAccessLink;
+use LayrShift\AbilityCategories;
 use LayrShift\Abilities\CreateUploadLink;
 use LayrShift\Abilities\DeleteFile;
 use LayrShift\Abilities\DisableFile;
@@ -20,31 +21,18 @@ use LayrShift\Abilities\ListDirectory;
 use LayrShift\Abilities\ReadFile;
 use LayrShift\Abilities\RunWpCli;
 use LayrShift\Abilities\WriteFile;
+use LayrShift\Blogibot\Loader as BlogibotLoader;
+use LayrShift\Elementor\Loader as ElementorLoader;
 use LayrShift\Gutenberg\Loader as GutenbergLoader;
 use LayrShift\Skills\Prompts;
+use LayrShift\Smush\Loader as SmushLoader;
+use LayrShift\VaultShift\Loader as VaultShiftLoader;
+use LayrShift\Yoast\Loader as YoastLoader;
 
 /**
  * Ability registry.
  */
 final class AbilitiesRegistry {
-
-	public static function register_category(): void {
-		if ( ! function_exists( 'wp_register_ability_category' ) ) {
-			return;
-		}
-
-		if ( wp_has_ability_category( 'layrshift' ) ) {
-			return;
-		}
-
-		wp_register_ability_category(
-			'layrshift',
-			array(
-				'label'       => __( 'LayrShift', 'layrshift' ),
-				'description' => __( 'Dev/staging abilities for AI agent access to WordPress.', 'layrshift' ),
-			)
-		);
-	}
 
 	public static function register(): void {
 		if ( ! Plugin::meets_requirements() || ! Plugin::is_abilities_enabled() ) {
@@ -62,6 +50,11 @@ final class AbilitiesRegistry {
 		CreateAdminAccessLink::register();
 		RunWpCli::register();
 		GutenbergLoader::register_abilities();
+		ElementorLoader::register_abilities();
+		YoastLoader::register_abilities();
+		SmushLoader::register_abilities();
+		VaultShiftLoader::register_abilities();
+		BlogibotLoader::register_abilities();
 	}
 
 	/**
@@ -76,6 +69,11 @@ final class AbilitiesRegistry {
 				'layrshift/get-wp-cli-job',
 			),
 			GutenbergLoader::ability_names(),
+			ElementorLoader::ability_names(),
+			YoastLoader::ability_names(),
+			SmushLoader::ability_names(),
+			VaultShiftLoader::ability_names(),
+			BlogibotLoader::ability_names(),
 			array(
 				'layrshift/skill-get',
 				'layrshift/skill-write',
@@ -105,7 +103,7 @@ final class AbilitiesRegistry {
 			'layrshift/execute-php' => array(
 				'label'               => __( 'Execute PHP', 'layrshift' ),
 				'description'         => __( 'Execute PHP code with full access to the WordPress environment including $wpdb, all WordPress functions, and all active plugins.', 'layrshift' ),
-				'category'            => 'layrshift',
+				'category'            => AbilityCategories::CODE_EXECUTION,
 				'execute_callback'    => array( ExecutePhp::class, 'execute' ),
 				'permission_callback' => array( Auth::class, 'check_ability_permission' ),
 				'input_schema'        => array(
@@ -126,7 +124,7 @@ final class AbilitiesRegistry {
 			'layrshift/read-file' => array(
 				'label'               => __( 'Read File', 'layrshift' ),
 				'description'         => __( 'Read a file from the server filesystem.', 'layrshift' ),
-				'category'            => 'layrshift',
+				'category'            => AbilityCategories::FILESYSTEM,
 				'execute_callback'    => array( ReadFile::class, 'execute' ),
 				'permission_callback' => array( Auth::class, 'check_ability_permission' ),
 				'input_schema'        => array(
@@ -146,7 +144,7 @@ final class AbilitiesRegistry {
 			'layrshift/write-file' => array(
 				'label'               => __( 'Write File', 'layrshift' ),
 				'description'         => __( 'Create or overwrite a file. PHP files are restricted to the sandbox directory.', 'layrshift' ),
-				'category'            => 'layrshift',
+				'category'            => AbilityCategories::FILESYSTEM,
 				'execute_callback'    => array( WriteFile::class, 'execute' ),
 				'permission_callback' => array( Auth::class, 'check_ability_permission' ),
 				'input_schema'        => array(
@@ -166,7 +164,7 @@ final class AbilitiesRegistry {
 			'layrshift/edit-file' => array(
 				'label'               => __( 'Edit File', 'layrshift' ),
 				'description'         => __( 'Make a precise string replacement in an existing file.', 'layrshift' ),
-				'category'            => 'layrshift',
+				'category'            => AbilityCategories::FILESYSTEM,
 				'execute_callback'    => array( EditFile::class, 'execute' ),
 				'permission_callback' => array( Auth::class, 'check_ability_permission' ),
 				'input_schema'        => array(
@@ -186,7 +184,7 @@ final class AbilitiesRegistry {
 			'layrshift/delete-file' => array(
 				'label'               => __( 'Delete File', 'layrshift' ),
 				'description'         => __( 'Delete a file or directory from the filesystem.', 'layrshift' ),
-				'category'            => 'layrshift',
+				'category'            => AbilityCategories::FILESYSTEM,
 				'execute_callback'    => array( DeleteFile::class, 'execute' ),
 				'permission_callback' => array( Auth::class, 'check_ability_permission' ),
 				'input_schema'        => array(
@@ -205,7 +203,7 @@ final class AbilitiesRegistry {
 			'layrshift/disable-file' => array(
 				'label'               => __( 'Disable Sandbox File', 'layrshift' ),
 				'description'         => __( 'Temporarily disable a sandbox PHP file without deleting it.', 'layrshift' ),
-				'category'            => 'layrshift',
+				'category'            => AbilityCategories::FILESYSTEM,
 				'execute_callback'    => array( DisableFile::class, 'execute' ),
 				'permission_callback' => array( Auth::class, 'check_ability_permission' ),
 				'input_schema'        => array(
@@ -220,7 +218,7 @@ final class AbilitiesRegistry {
 			'layrshift/enable-file' => array(
 				'label'               => __( 'Enable Sandbox File', 'layrshift' ),
 				'description'         => __( 'Re-enable a previously disabled sandbox PHP file.', 'layrshift' ),
-				'category'            => 'layrshift',
+				'category'            => AbilityCategories::FILESYSTEM,
 				'execute_callback'    => array( EnableFile::class, 'execute' ),
 				'permission_callback' => array( Auth::class, 'check_ability_permission' ),
 				'input_schema'        => array(
@@ -235,7 +233,7 @@ final class AbilitiesRegistry {
 			'layrshift/list-directory' => array(
 				'label'               => __( 'List Directory', 'layrshift' ),
 				'description'         => __( 'Browse the server filesystem.', 'layrshift' ),
-				'category'            => 'layrshift',
+				'category'            => AbilityCategories::FILESYSTEM,
 				'execute_callback'    => array( ListDirectory::class, 'execute' ),
 				'permission_callback' => array( Auth::class, 'check_ability_permission' ),
 				'input_schema'        => array(
@@ -256,7 +254,7 @@ final class AbilitiesRegistry {
 			'layrshift/create-upload-link' => array(
 				'label'               => __( 'Create Upload Link', 'layrshift' ),
 				'description'         => __( 'Generate a temporary authenticated URL for file uploads.', 'layrshift' ),
-				'category'            => 'layrshift',
+				'category'            => AbilityCategories::FILESYSTEM,
 				'execute_callback'    => array( CreateUploadLink::class, 'execute' ),
 				'permission_callback' => array( Auth::class, 'check_ability_permission' ),
 				'input_schema'        => array(

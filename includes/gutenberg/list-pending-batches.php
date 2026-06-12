@@ -17,7 +17,7 @@ wp_register_ability('layrshift/gutenberg-list-pending-batches', [
         'Lists compact queue state grouped by Gutenberg batch for agent recovery, plus the current Block Editor Queue runtime status and curl SSE/poll URLs. Full block specs are not returned.',
         'layrshift',
     ),
-    'category' => 'gutenberg',
+    'category' => 'layrshift-gutenberg',
     'input_schema' => [
         'type' => 'object',
         'properties' => [

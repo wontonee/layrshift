@@ -9,6 +9,7 @@ declare( strict_types=1 );
 
 namespace LayrShift\Skills\Abilities;
 
+use LayrShift\AbilityCategories;
 use LayrShift\Auth;
 use WP_Error;
 
@@ -27,7 +28,7 @@ final class SkillDelete {
 			array(
 				'label'               => __( 'Delete Skill', 'layrshift' ),
 				'description'         => __( 'Move a LayrShift user skill to trash. Pass permanent=true to delete immediately.', 'layrshift' ),
-				'category'            => 'skill',
+				'category'            => AbilityCategories::SKILL,
 				'execute_callback'    => array( self::class, 'execute' ),
 				'permission_callback' => array( Auth::class, 'check_ability_permission' ),
 				'input_schema'        => array(

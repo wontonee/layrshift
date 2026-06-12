@@ -20,7 +20,7 @@ wp_register_ability('layrshift/gutenberg-create-pending-batch', [
         'Creates an empty draft Gutenberg pending batch and reports the Block Editor Queue runtime with curl SSE/poll URLs. Draft batches are recoverable but not finalizable; after adding target changes, call gutenberg-enable-batch-finalization. If the runtime is offline, ask the user to open the generic Block Editor Queue page and keep it open while you work.',
         'layrshift',
     ),
-    'category' => 'gutenberg',
+    'category' => 'layrshift-gutenberg',
     'input_schema' => [
         'type' => 'object',
         'properties' => [

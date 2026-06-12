@@ -27,7 +27,25 @@ final class AbilityPolicy {
 	}
 
 	public static function is_hub_protected( string $ability_name ): bool {
-		return str_starts_with( $ability_name, 'mcp-adapter/' );
+		unset( $ability_name );
+
+		return false;
+	}
+
+	public static function is_available( string $ability_name ): bool {
+		if ( ! Plugin::is_abilities_enabled() ) {
+			return false;
+		}
+
+		if ( self::is_disabled( $ability_name ) ) {
+			return false;
+		}
+
+		return true;
+	}
+
+	public static function check_rest_permission(): bool {
+		return Auth::check_ability_permission();
 	}
 
 	public static function is_hub_screen(): bool {

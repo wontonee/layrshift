@@ -17,7 +17,13 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'LAYRSHIFT_VERSION', '1.0.2' );
+$layrshift_plugin_data = get_file_data(
+	__FILE__,
+	array(
+		'Version' => 'Version',
+	)
+);
+define( 'LAYRSHIFT_VERSION', $layrshift_plugin_data['Version'] ?: '1.0.0' );
 define( 'LAYRSHIFT_FILE', __FILE__ );
 define( 'LAYRSHIFT_PATH', plugin_dir_path( __FILE__ ) );
 define( 'LAYRSHIFT_URL', plugin_dir_url( __FILE__ ) );

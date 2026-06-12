@@ -17,7 +17,7 @@ wp_register_ability('layrshift/gutenberg-get-finalizer-runtime', [
         'Reports whether the LayrShift Block Editor Queue admin page is open and heartbeating, including token-gated SSE and poll URLs that agents can watch with curl. Call this at the start of Gutenberg work: if the runtime is offline, ask the user to open the returned generic Block Editor Queue page URL and keep it open while static/native Gutenberg changes are queued and finalized.',
         'layrshift',
     ),
-    'category' => 'gutenberg',
+    'category' => 'layrshift-gutenberg',
     'input_schema' => [
         'type' => 'object',
         'properties' => [],

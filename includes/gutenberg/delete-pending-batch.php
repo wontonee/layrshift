@@ -19,7 +19,7 @@ wp_register_ability('layrshift/gutenberg-delete-pending-batch', [
         'Cancels a draft, ready, running, prepared, failed, or conflicted Gutenberg pending batch and its non-finalized items without touching target content.',
         'layrshift',
     ),
-    'category' => 'gutenberg',
+    'category' => 'layrshift-gutenberg',
     'input_schema' => [
         'type' => 'object',
         'properties' => [

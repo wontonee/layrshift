@@ -20,7 +20,7 @@ wp_register_ability('layrshift/gutenberg-get-content', [
         'Reads the live saved Gutenberg post_content for one target and returns a compact parsed block tree. This also reports the Block Editor Queue runtime plus curl SSE/poll URLs so agents can ask the user to open the queue page before queueing static/native block changes. This does not read queued pending block_spec data; if a non-terminal Gutenberg queue item exists for the target, pending_gutenberg_change summarizes it separately.',
         'layrshift',
     ),
-    'category' => 'gutenberg',
+    'category' => 'layrshift-gutenberg',
     'input_schema' => [
         'type' => 'object',
         'properties' => [

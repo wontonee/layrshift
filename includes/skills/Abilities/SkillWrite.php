@@ -9,6 +9,7 @@ declare( strict_types=1 );
 
 namespace LayrShift\Skills\Abilities;
 
+use LayrShift\AbilityCategories;
 use LayrShift\Auth;
 use LayrShift\Skills\Cpt;
 use LayrShift\Skills\Parser;
@@ -30,7 +31,7 @@ final class SkillWrite {
 			array(
 				'label'               => __( 'Write Skill', 'layrshift' ),
 				'description'         => __( 'Create or update a LayrShift user skill. The title becomes the slug.', 'layrshift' ),
-				'category'            => 'skill',
+				'category'            => AbilityCategories::SKILL,
 				'execute_callback'    => array( self::class, 'execute' ),
 				'permission_callback' => array( Auth::class, 'check_ability_permission' ),
 				'input_schema'        => array(

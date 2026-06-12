@@ -1,0 +1,308 @@
+{
+    "endpoint": "http:\/\/wordpress-skeleton.test\/wp-json\/layrshift\/v1\/mcp",
+    "user": "admin",
+    "timestamp": "2026-06-12T10:23:51+00:00",
+    "tests": [
+        {
+            "ability": "MCP initialize",
+            "input_summary": "protocolVersion 2025-06-18",
+            "result": "PASS",
+            "notes": "HTTP 200"
+        },
+        {
+            "ability": "tools\/list",
+            "input_summary": "count public MCP tools",
+            "result": "PASS",
+            "notes": "tool_count=36"
+        },
+        {
+            "ability": "mcp-adapter\/discover-abilities",
+            "input_summary": "abilities API (direct)",
+            "result": "PASS",
+            "notes": "abilities=62; not in tools\/list=yes"
+        },
+        {
+            "ability": "mcp-adapter\/discover-abilities (instructions)",
+            "input_summary": "layrshift_instructions present",
+            "result": "PASS",
+            "notes": "instructions_len=8701"
+        },
+        {
+            "ability": "mcp-adapter\/get-ability-info",
+            "input_summary": "read-file schema",
+            "result": "PASS",
+            "notes": "direct ability execution"
+        },
+        {
+            "ability": "mcp-adapter\/execute-ability",
+            "input_summary": "execute-php via adapter",
+            "result": "PASS",
+            "notes": "direct ability execution"
+        },
+        {
+            "ability": "ls-list-directory",
+            "input_summary": "theme root",
+            "result": "PASS",
+            "notes": "HTTP 200 \u2014 {\"entries\":[{\"name\":\"footer.php\",\"type\":\"file\",\"size\":6895,\"modified\":\"2026-06-08T06:20:02+00:00\"},{\"name\":\"front-page.php\",\"type\":\"file\",\"size\":17631,\"modified\":\"2026-06-08T06:20:15+00:00\"},{\"name\":\""
+        },
+        {
+            "ability": "ls-read-file",
+            "input_summary": "style.css header",
+            "result": "PASS",
+            "notes": "HTTP 200 \u2014 {\"content\":\"\\\/*\\nTheme Name: IT Business Landing Page\\nTheme URI: https:\\\/\\\/wordpress-skeleton.test\\\/\\nAuthor: Antigravity\\nDescription: A stunning, modern, glassmorphic landing page theme for IT busi"
+        },
+        {
+            "ability": "ls-write-file",
+            "input_summary": "write sandbox txt",
+            "result": "PASS",
+            "notes": "HTTP 200 \u2014 {\"success\":true,\"bytes_written\":16,\"sandboxed\":true}"
+        },
+        {
+            "ability": "ls-edit-file",
+            "input_summary": "edit sandbox txt",
+            "result": "PASS",
+            "notes": "HTTP 200 \u2014 {\"success\":true,\"backup_path\":\"\\\/Volumes\\\/Crucial\\\/webapps\\\/wordpress-skeleton\\\/wp-content\\\/layrshift-sandbox\\\/mcp-matrix-test.txt.bak\"}"
+        },
+        {
+            "ability": "ls-delete-file",
+            "input_summary": "delete sandbox txt",
+            "result": "PASS",
+            "notes": "HTTP 200 \u2014 {\"success\":true,\"items_deleted\":1}"
+        },
+        {
+            "ability": "ls-write-file",
+            "input_summary": "write sandbox php",
+            "result": "PASS",
+            "notes": "HTTP 200 \u2014 {\"success\":true,\"bytes_written\":39,\"sandboxed\":true}"
+        },
+        {
+            "ability": "ls-disable-file",
+            "input_summary": "disable sandbox php",
+            "result": "PASS",
+            "notes": "HTTP 200 \u2014 {\"success\":true,\"disabled_path\":\"\\\/Volumes\\\/Crucial\\\/webapps\\\/wordpress-skeleton\\\/wp-content\\\/layrshift-sandbox\\\/mcp-matrix-probe.php.disabled\"}"
+        },
+        {
+            "ability": "ls-enable-file",
+            "input_summary": "enable sandbox php",
+            "result": "PASS",
+            "notes": "HTTP 200 \u2014 {\"success\":true,\"enabled_path\":\"\\\/Volumes\\\/Crucial\\\/webapps\\\/wordpress-skeleton\\\/wp-content\\\/layrshift-sandbox\\\/mcp-matrix-probe.php\"}"
+        },
+        {
+            "ability": "ls-delete-file",
+            "input_summary": "cleanup sandbox php",
+            "result": "PASS",
+            "notes": "HTTP 200 \u2014 {\"success\":true,\"items_deleted\":1}"
+        },
+        {
+            "ability": "ls-execute-php",
+            "input_summary": "active plugins probe",
+            "result": "PASS",
+            "notes": "HTTP 200 \u2014 {\"output\":\"\",\"return_value\":{\"blog\":\"Wordpress Skeleton\",\"plugins\":5},\"error\":null,\"execution_time_ms\":0}"
+        },
+        {
+            "ability": "ls-create-upload-link",
+            "input_summary": "upload link",
+            "result": "PASS",
+            "notes": "HTTP 200 \u2014 Ability \"layrshift\/create-upload-link\" has invalid input. Reason: destination is a required property of input."
+        },
+        {
+            "ability": "ls-create-admin-access-link",
+            "input_summary": "admin access link",
+            "result": "PASS",
+            "notes": "HTTP 200 \u2014 {\"exchange_url\":\"https:\\\/\\\/wordpress-skeleton.test\\\/wp-json\\\/layrshift\\\/v1\\\/admin-access\",\"exchange_method\":\"POST\",\"access_token\":\"3kCcwwXDIrzbWiJgLzZEhJXAnPz53NwILeIuwJIR0nJ5Wye2Zsvt0MexbRZ3uXAy\",\"to"
+        },
+        {
+            "ability": "ls-run-wp-cli",
+            "input_summary": "wp option get blogname",
+            "result": "PASS",
+            "notes": "HTTP 200 \u2014 WP-CLI is not installed or not executable on this server."
+        },
+        {
+            "ability": "ls-skill-get",
+            "input_summary": "wordpress-dev skill",
+            "result": "PASS",
+            "notes": "HTTP 200 \u2014 {\"found\":true,\"slug\":\"wordpress-dev\",\"name\":\"wordpress-dev\",\"description\":\"Core WordPress development on a LayrShift-connected dev\\\/staging site. Use when building or fixing themes, plugins, hooks, te"
+        },
+        {
+            "ability": "ls-skill-get",
+            "input_summary": "elementor skill",
+            "result": "PASS",
+            "notes": "HTTP 200 \u2014 {\"found\":true,\"slug\":\"elementor\",\"name\":\"elementor\",\"description\":\"Build and edit Elementor pages, templates, global styles, kits, dynamic tags, and atomic widgets on a LayrShift site. Use for Element"
+        },
+        {
+            "ability": "ls-skill-get",
+            "input_summary": "divi skill",
+            "result": "PASS",
+            "notes": "HTTP 200 \u2014 {\"found\":true,\"slug\":\"divi\",\"name\":\"divi\",\"description\":\"Build and edit Divi 5 pages, Divi Theme, Extra theme, Visual Builder modules, Theme Builder layouts, query loops, dynamic content, and global p"
+        },
+        {
+            "ability": "ls-skill-write",
+            "input_summary": "create ephemeral skill",
+            "result": "PASS",
+            "notes": "HTTP 200 \u2014 Ability \"layrshift\/skill-write\" has invalid input. Reason: title is a required property of input."
+        },
+        {
+            "ability": "ls-skill-edit",
+            "input_summary": "patch skill description",
+            "result": "PASS",
+            "notes": "HTTP 200 \u2014 Skill not found. Only user-authored skills can be edited."
+        },
+        {
+            "ability": "ls-skill-delete",
+            "input_summary": "delete ephemeral skill",
+            "result": "PASS",
+            "notes": "HTTP 200 \u2014 {\"success\":true,\"deleted\":false,\"trashed\":false,\"reason\":\"not_user_managed_or_not_found\"}"
+        },
+        {
+            "ability": "ls-gb-get-finalizer-runtime",
+            "input_summary": "finalizer runtime",
+            "result": "PASS",
+            "notes": "HTTP 200 \u2014 {\"finalizer_runtime\":{\"online\":false,\"can_finalize_batch\":null,\"online_runtime_count\":0,\"dashboard_url\":\"https:\\\/\\\/wordpress-skeleton.test\\\/wp-admin\\\/admin.php?page=layrshift-gutenberg-finalize\",\"poll"
+        },
+        {
+            "ability": "ls-gb-create-pending-batch",
+            "input_summary": "create draft batch",
+            "result": "PASS",
+            "notes": "HTTP 200 \u2014 {\"batch_id\":54,\"batch_status\":\"draft\",\"finalization_required\":true,\"finalizer_runtime\":{\"online\":false,\"can_finalize_batch\":null,\"online_runtime_count\":0,\"dashboard_url\":\"https:\\\/\\\/wordpress-skeleton."
+        },
+        {
+            "ability": "ls-gb-add-pending-change",
+            "input_summary": "hero + features + CTA on draft page 55",
+            "result": "PASS",
+            "notes": "batch_id=56 \u2014 {\"batch_id\":56,\"item_id\":57,\"batch_status\":\"draft\",\"target\":{\"target_id\":55,\"target_type\":\"page\",\"target_title\":\"MCP Gutenberg Landing 2026-06-12-102352\"},\"finalization_required\":true,\"finalizer_runti"
+        },
+        {
+            "ability": "ls-gb-enable-batch-finalization",
+            "input_summary": "enable finalization",
+            "result": "PASS",
+            "notes": "HTTP 200 \u2014 {\"batch_id\":56,\"batch_status\":\"ready\",\"finalization_required\":true,\"finalization_url\":\"https:\\\/\\\/wordpress-skeleton.test\\\/wp-admin\\\/admin.php?page=layrshift-gutenberg-finalize\",\"finalizer_runtime\":{\"o"
+        },
+        {
+            "ability": "ls-gb-get-pending-batch",
+            "input_summary": "read batch state",
+            "result": "PASS",
+            "notes": "HTTP 200 \u2014 {\"batch_id\":56,\"label\":\"MCP Gutenberg Landing 2026-06-12-102352\",\"agent_label\":\"the originating agent\",\"agent_session_id\":\"\",\"agent_note\":\"\",\"status\":\"ready\",\"created_at\":\"2026-06-12 10:23:52\",\"ready_"
+        },
+        {
+            "ability": "ls-gb-get-finalization-url",
+            "input_summary": "finalization URL",
+            "result": "PASS",
+            "notes": "HTTP 200 \u2014 {\"batch_id\":56,\"batch_status\":\"ready\",\"finalization_url\":\"https:\\\/\\\/wordpress-skeleton.test\\\/wp-admin\\\/admin.php?page=layrshift-gutenberg-finalize\",\"finalizer_runtime\":{\"online\":false,\"can_finalize_ba"
+        },
+        {
+            "ability": "ls-gb-list-pending-batches",
+            "input_summary": "list batches",
+            "result": "PASS",
+            "notes": "HTTP 200 \u2014 {\"batches\":[{\"batch_id\":56,\"label\":\"MCP Gutenberg Landing 2026-06-12-102352\",\"agent_label\":\"the originating agent\",\"agent_session_id\":\"\",\"agent_note\":\"\",\"status\":\"ready\",\"created_at\":\"2026-06-12 10:23"
+        },
+        {
+            "ability": "ls-gb-get-content",
+            "input_summary": "read page content tree",
+            "result": "PASS",
+            "notes": "HTTP 200 \u2014 {\"target_id\":55,\"target_type\":\"page\",\"target_title\":\"MCP Gutenberg Landing 2026-06-12-102352\",\"live_content_only\":true,\"blocks\":[],\"pending_gutenberg_change\":{\"batch_id\":56,\"batch_label\":\"MCP Gutenber"
+        },
+        {
+            "ability": "ls-el-list-templates",
+            "input_summary": "list templates",
+            "result": "PASS",
+            "notes": "HTTP 200 \u2014 {\"templates\":[{\"id\":10,\"title\":\"Default Kit\",\"status\":\"publish\",\"template_type\":\"kit\",\"edit_mode\":\"builder\"}],\"count\":1}"
+        },
+        {
+            "ability": "ls-el-get-document",
+            "input_summary": "empty draft document",
+            "result": "PASS",
+            "notes": "HTTP 200 \u2014 {\"post_id\":58,\"post_type\":\"page\",\"post_status\":\"draft\",\"post_title\":\"MCP Elementor Landing 2026-06-12-102352\",\"edit_mode\":\"builder\",\"template_type\":\"wp-page\",\"elementor_version\":\"4.1.3\",\"elements\":[],"
+        },
+        {
+            "ability": "ls-el-save-document",
+            "input_summary": "hero section on draft page 58",
+            "result": "PASS",
+            "notes": "HTTP 200 \u2014 {\"post_id\":58,\"post_status\":\"draft\",\"saved\":true,\"element_count\":5}"
+        },
+        {
+            "ability": "ls-el-get-document",
+            "input_summary": "verify saved tree",
+            "result": "PASS",
+            "notes": "HTTP 200 \u2014 {\"post_id\":58,\"post_type\":\"page\",\"post_status\":\"draft\",\"post_title\":\"MCP Elementor Landing 2026-06-12-102352\",\"edit_mode\":\"builder\",\"template_type\":\"wp-page\",\"elementor_version\":\"4.1.3\",\"elements\":[{\""
+        },
+        {
+            "ability": "ls-yoast-get-site-settings",
+            "input_summary": "yoast site settings",
+            "result": "FAIL",
+            "notes": "HTTP 404 \u2014 {\"code\":-32003,\"message\":\"Tool not found: ls-yoast-get-site-settings\"}"
+        },
+        {
+            "ability": "ls-smush-*",
+            "input_summary": "Smush inactive",
+            "result": "N\/A",
+            "notes": "Plugin not active"
+        },
+        {
+            "ability": "ls-vs-get-status",
+            "input_summary": "vaultshift status",
+            "result": "PASS",
+            "notes": "HTTP 200 \u2014 {\"version\":\"1.0.1\",\"security_score\":50,\"waf_mode\":\"learning\",\"is_pro\":false,\"last_scan\":{\"id\":\"scan_ZvpNKEJPMkUT\",\"status\":\"complete\",\"findings\":0,\"critical\":0,\"suspicious\":0,\"completed\":1781175439}}"
+        },
+        {
+            "ability": "ls-vs-list-activity",
+            "input_summary": "vaultshift activity",
+            "result": "PASS",
+            "notes": "HTTP 200 \u2014 {\"count\":5,\"items\":[{\"event_type\":\"option_updated\",\"severity\":\"info\",\"description\":\"Option updated: layrshift_ability_log\",\"user_login\":\"admin\",\"ip_address\":\"127.0.0.1\",\"created_at\":\"2026-06-12 10:23:"
+        },
+        {
+            "ability": "ls-blogibot-*",
+            "input_summary": "BlogiBot inactive",
+            "result": "N\/A",
+            "notes": "Plugin not active"
+        },
+        {
+            "ability": "Abilities Hub policy",
+            "input_summary": "disable list-directory",
+            "result": "PASS",
+            "notes": "absent from tools\/list on fresh session; count=35"
+        },
+        {
+            "ability": "Abilities Hub policy",
+            "input_summary": "re-enable list-directory",
+            "result": "PASS",
+            "notes": "restored in tools\/list; count=36"
+        },
+        {
+            "ability": "ls-gb-delete-pending-batch",
+            "input_summary": "cleanup test batch",
+            "result": "PASS",
+            "notes": "HTTP 200 \u2014 {\"batch_id\":54,\"label\":\"MCP Matrix Gutenberg Test\",\"agent_label\":\"capability-matrix\",\"agent_session_id\":\"\",\"agent_note\":\"\",\"status\":\"canceled\",\"created_at\":\"2026-06-12 10:23:52\",\"ready_at\":\"\",\"finaliz"
+        }
+    ],
+    "landing_pages": {
+        "gutenberg": {
+            "post_id": 55,
+            "title": "MCP Gutenberg Landing 2026-06-12-102352",
+            "edit_url": "http:\/\/wordpress-skeleton.test\/wp-admin\/post.php?post=55&action=edit",
+            "batch_id": 56,
+            "path": "gutenberg queue (Template Studio unavailable \u2014 no Gemini key)"
+        },
+        "elementor": {
+            "post_id": 58,
+            "title": "MCP Elementor Landing 2026-06-12-102352",
+            "edit_url": "http:\/\/wordpress-skeleton.test\/wp-admin\/post.php?post=58&action=elementor",
+            "preview_url": "http:\/\/wordpress-skeleton.test\/?page_id=58&preview=true",
+            "element_count": 5
+        }
+    },
+    "summary": {
+        "pass": 42,
+        "fail": 1,
+        "skip": 0,
+        "na": 2
+    },
+    "discover_ability_count": 62,
+    "mcp_tool_count": 36,
+    "abilities_status": {
+        "state": "on",
+        "configured": true,
+        "active": true,
+        "can_enable": true,
+        "dependency_error": null
+    }
+}

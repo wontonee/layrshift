@@ -87,6 +87,12 @@ function register_rest_routes(): void
 
 function rest_can_access_dashboard(): bool|WP_Error
 {
+    if (!\LayrShift\AbilityPolicy::check_rest_permission()) {
+        return new WP_Error('rest_forbidden', 'LayrShift abilities are disabled or you are not allowed to access the Block Editor Queue dashboard.', [
+            'status' => 403,
+        ]);
+    }
+
     if (!current_user_can('edit_posts')) {
         return new WP_Error('rest_forbidden', 'You are not allowed to access the Block Editor Queue dashboard.', [
             'status' => 403,

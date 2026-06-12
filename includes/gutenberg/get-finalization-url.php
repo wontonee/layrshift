@@ -20,7 +20,7 @@ wp_register_ability('layrshift/gutenberg-get-finalization-url', [
         'Returns the generic Block Editor Queue admin page URL for one ready or failed Gutenberg batch, plus the current finalizer runtime status and curl SSE/poll URLs. If the page is open and can finalize the batch, prefer watching the status URL instead of asking the user to do anything.',
         'layrshift',
     ),
-    'category' => 'gutenberg',
+    'category' => 'layrshift-gutenberg',
     'input_schema' => [
         'type' => 'object',
         'properties' => [

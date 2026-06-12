@@ -35,11 +35,26 @@ final class Auth {
 			return false;
 		}
 
+		if ( ! self::is_https_ok() ) {
+			return false;
+		}
+
 		if ( ! is_user_logged_in() ) {
 			return false;
 		}
 
 		return self::current_user_allowed();
+	}
+
+	/**
+	 * Tighten mcp-adapter meta-ability gates to administrator-level access.
+	 *
+	 * @param string $capability Default capability from mcp-adapter.
+	 */
+	public static function mcp_adapter_capability( string $capability ): string {
+		unset( $capability );
+
+		return 'manage_options';
 	}
 
 	public static function current_user_allowed(): bool {

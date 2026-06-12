@@ -105,8 +105,17 @@ $studio_payload = array(
 
 				<div class="layrshift-field">
 					<label for="layrshift-mcp-name"><?php esc_html_e( 'Server name in config', 'layrshift' ); ?></label>
-					<input type="text" id="layrshift-mcp-name" class="layrshift-input" value="<?php echo esc_attr( $server_name ); ?>" maxlength="25" />
-					<p class="layrshift-field__help"><?php esc_html_e( 'Key used inside mcp.json — updates snippets live.', 'layrshift' ); ?></p>
+					<input type="text" id="layrshift-mcp-name" class="layrshift-input" value="<?php echo esc_attr( $server_name ); ?>" maxlength="<?php echo (int) \LayrShift\McpToolNames::RECOMMENDED_MAX_SERVER_NAME_LENGTH; ?>" />
+					<p class="layrshift-field__help">
+						<?php
+						printf(
+							/* translators: 1: recommended max server name length, 2: Cursor combined name limit */
+							esc_html__( 'Short key inside mcp.json (max %1$d chars). Cursor filters tools when server:tool exceeds %2$d characters — LayrShift uses compact tool names (ls-gb-*, ls-el-*, …) so defaults stay safe.', 'layrshift' ),
+							(int) \LayrShift\McpToolNames::RECOMMENDED_MAX_SERVER_NAME_LENGTH,
+							(int) \LayrShift\McpToolNames::CURSOR_MAX_COMBINED_LENGTH
+						);
+						?>
+					</p>
 				</div>
 
 				<div class="layrshift-snippet-meta">

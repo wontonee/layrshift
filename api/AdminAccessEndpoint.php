@@ -186,6 +186,13 @@ final class AdminAccessEndpoint {
 			);
 		}
 
+		if ( str_contains( $admin_path, '..' ) ) {
+			return new \WP_Error(
+				'invalid_admin_access_redirect',
+				'Redirect path must not contain parent directory segments.'
+			);
+		}
+
 		$admin_path = ltrim( $admin_path, '/' );
 		if ( str_starts_with( $admin_path, 'wp-admin/' ) ) {
 			$admin_path = substr( $admin_path, strlen( 'wp-admin/' ) );

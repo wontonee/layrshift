@@ -46,6 +46,12 @@ WP_API_URL=https://yoursite.example/wp-json/layrshift/v1/mcp
 | `layrshift/list-directory` | Browse directories |
 | `layrshift/create-upload-link` | Signed upload URL |
 
+## Skills
+
+Built-in agent playbooks ship in `includes/skills/built-in/` — load via `layrshift/skill-get`.
+Covers Gutenberg, Elementor, Bricks, WooCommerce, ACF, and 14 more specializations
+(see [docs/SKILLS-CATALOG.md](docs/SKILLS-CATALOG.md)).
+
 ## Safe mode
 
 If a sandbox file breaks the site, visit any admin URL with `?layrshift-safe-mode=1`.

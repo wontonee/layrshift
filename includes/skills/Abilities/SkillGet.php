@@ -9,6 +9,7 @@ declare( strict_types=1 );
 
 namespace LayrShift\Skills\Abilities;
 
+use LayrShift\AbilityCategories;
 use LayrShift\Auth;
 use LayrShift\Skills\Parser;
 use LayrShift\Skills\Sources;
@@ -47,7 +48,7 @@ final class SkillGet {
 			array(
 				'label'               => __( 'Get Skill', 'layrshift' ),
 				'description'         => __( 'Load a LayrShift skill by slug. Returns the full SKILL.md content plus metadata.', 'layrshift' ),
-				'category'            => 'skill',
+				'category'            => AbilityCategories::SKILL,
 				'execute_callback'    => array( self::class, 'execute' ),
 				'permission_callback' => array( Auth::class, 'check_ability_permission' ),
 				'input_schema'        => array(

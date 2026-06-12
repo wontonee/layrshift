@@ -32,11 +32,12 @@ final class UploadToken {
 		set_transient( self::key( $token ), $payload, $expires_seconds );
 
 		return array(
-			'upload_url'  => rest_url( 'layrshift/v1/upload' ) . '?token=' . rawurlencode( $token ),
-			'expires_at'  => gmdate( 'c', $payload['expires'] ),
-			'method'      => 'POST',
-			'field_name'  => 'file',
-			'token'       => $token,
+			'upload_url'   => rest_url( 'layrshift/v1/upload' ),
+			'expires_at'   => gmdate( 'c', $payload['expires'] ),
+			'method'       => 'POST',
+			'field_name'   => 'file',
+			'token'        => $token,
+			'token_header' => 'X-LayrShift-Upload-Token',
 		);
 	}
 

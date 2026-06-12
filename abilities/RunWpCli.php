@@ -9,6 +9,7 @@ declare( strict_types=1 );
 
 namespace LayrShift\Abilities;
 
+use LayrShift\AbilityCategories;
 use LayrShift\Auth;
 use LayrShift\Sandbox;
 
@@ -23,7 +24,7 @@ final class RunWpCli {
 				array(
 					'label'               => __( 'Run WP-CLI Command', 'layrshift' ),
 					'description'         => __( 'Runs a WP-CLI command on the server synchronously or in the background.', 'layrshift' ),
-					'category'            => 'code-execution',
+					'category'            => AbilityCategories::CODE_EXECUTION,
 					'execute_callback'    => array( self::class, 'run' ),
 					'permission_callback' => array( Auth::class, 'check_ability_permission' ),
 					'input_schema'        => array(
@@ -48,7 +49,7 @@ final class RunWpCli {
 				array(
 					'label'               => __( 'Get WP-CLI Job Status', 'layrshift' ),
 					'description'         => __( 'Checks the status of an asynchronous background WP-CLI job.', 'layrshift' ),
-					'category'            => 'code-execution',
+					'category'            => AbilityCategories::CODE_EXECUTION,
 					'execute_callback'    => array( self::class, 'get_job' ),
 					'permission_callback' => array( Auth::class, 'check_ability_permission' ),
 					'input_schema'        => array(

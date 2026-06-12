@@ -65,3 +65,70 @@ The description is the **only** field the agent reads to decide whether to load 
 - `fail` (default) — error with suggested free slug
 - `rename` — append `-2`, `-3`, etc.
 - `replace` — overwrite existing **user** skill (not built-ins)
+
+## Builder playbook template (~120–200 lines)
+
+Use this outline for page-builder and theme-builder skills (`elementor`, `divi`, `bricks`, etc.). Each section should include runnable `execute-php` snippets where possible.
+
+```markdown
+# {Builder} via LayrShift
+
+One-paragraph positioning: storage format, what NOT to do (e.g. no HTML blobs).
+
+## Start here
+Numbered agent checklist (load skill, probe, draft-first, re-read tree).
+
+## Probe environment
+PHP snippet: version constants, active check, bail message.
+
+## Version / format gate (if applicable)
+Table: primary path vs legacy path; probe snippet (blocks vs shortcodes vs JSON meta).
+
+## Content model
+Hierarchy (section → row → column → module, or builder equivalent).
+Where data lives (`post_content`, `_elementor_data`, `_bricks_*`, etc.).
+Read-tree PHP snippet.
+
+## Write workflow
+Duplicate → read → edit tree → save → clear cache → re-read.
+
+## Common tasks
+### Task A (e.g. hero section)
+### Task B (e.g. single module edit)
+### Task C (e.g. query loop)
+### Task D (e.g. dynamic content)
+### Task E (e.g. global presets / site templates)
+
+## Theme templates / headers (if applicable)
+CPT discovery, layout post IDs, assignment flow.
+
+## Child theme and custom code
+`read-file` / `edit-file` paths; sandbox for experiments.
+
+## LayrShift abilities map
+Table mapping steps to `execute-php`, `read-file`, `create-admin-access-link`, etc.
+
+## Rules (non-negotiable)
+Draft-first, no publish without user, no fake HTML layouts, staging only.
+
+## Verification checklist
+Checkbox list agents can run through before reporting done.
+
+## Failure modes
+Table: symptom → action (cache, wrong post ID, safe mode).
+```
+
+### Builder depth checklist
+
+Before shipping or updating a builder skill, confirm:
+
+- [ ] `description` includes 5+ concrete trigger phrases (product name, UI labels, shortcode prefixes)
+- [ ] Probe snippet returns version + active state; agent stops if inactive
+- [ ] Primary vs legacy storage format documented with detection snippet
+- [ ] Read path uses real meta keys / block format for that builder
+- [ ] Write path is tree/meta edits, not front-end HTML paste
+- [ ] At least 3 task-specific workflows (hero, single edit, loops/dynamic/templates)
+- [ ] Global/site-wide edits point to correct post type (kit, Theme Builder layout, Bricks template)
+- [ ] LayrShift abilities table present
+- [ ] Verification + failure modes sections included
+- [ ] Under ~5,000 words; no generic WordPress tutorial filler
