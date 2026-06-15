@@ -54,6 +54,7 @@ function get_target_post(int $post_id): WP_Post|WP_Error
     if (!$post instanceof WP_Post) {
         return new WP_Error(
             'elementor_document_not_found',
+            /* translators: %d: post ID */
             sprintf(__('Post %d was not found.', 'layrshift'), $post_id)
         );
     }
@@ -80,6 +81,7 @@ function get_elementor_document(int $post_id): Document|WP_Error
     if (!$document instanceof Document) {
         return new WP_Error(
             'elementor_document_not_found',
+            /* translators: %d: post ID */
             sprintf(__('Elementor document for post %d was not found.', 'layrshift'), $post_id)
         );
     }
@@ -165,7 +167,8 @@ function validate_elements_tree(array $elements, string $path = 'elements'): tru
         if (!is_array($element)) {
             return new WP_Error(
                 'elementor_invalid_elements',
-                sprintf(__('%s[%d] must be an object.', 'layrshift'), $path, $index)
+                /* translators: 1: elements path, 2: element index */
+                sprintf(__('%1$s[%2$d] must be an object.', 'layrshift'), $path, $index)
             );
         }
 
@@ -173,7 +176,8 @@ function validate_elements_tree(array $elements, string $path = 'elements'): tru
         if (!is_string($id) || $id === '') {
             return new WP_Error(
                 'elementor_invalid_elements',
-                sprintf(__('%s[%d].id must be a non-empty string.', 'layrshift'), $path, $index)
+                /* translators: 1: elements path, 2: element index */
+                sprintf(__('%1$s[%2$d].id must be a non-empty string.', 'layrshift'), $path, $index)
             );
         }
 
@@ -181,7 +185,8 @@ function validate_elements_tree(array $elements, string $path = 'elements'): tru
         if (!is_string($el_type) || $el_type === '') {
             return new WP_Error(
                 'elementor_invalid_elements',
-                sprintf(__('%s[%d].elType must be a non-empty string.', 'layrshift'), $path, $index)
+                /* translators: 1: elements path, 2: element index */
+                sprintf(__('%1$s[%2$d].elType must be a non-empty string.', 'layrshift'), $path, $index)
             );
         }
 
@@ -190,7 +195,8 @@ function validate_elements_tree(array $elements, string $path = 'elements'): tru
             if (!is_string($widget_type) || $widget_type === '') {
                 return new WP_Error(
                     'elementor_invalid_elements',
-                    sprintf(__('%s[%d].widgetType must be a non-empty string for widgets.', 'layrshift'), $path, $index)
+                    /* translators: 1: elements path, 2: element index */
+                    sprintf(__('%1$s[%2$d].widgetType must be a non-empty string for widgets.', 'layrshift'), $path, $index)
                 );
             }
         }
@@ -200,7 +206,8 @@ function validate_elements_tree(array $elements, string $path = 'elements'): tru
             if (!is_array($children)) {
                 return new WP_Error(
                     'elementor_invalid_elements',
-                    sprintf(__('%s[%d].elements must be an array.', 'layrshift'), $path, $index)
+                    /* translators: 1: elements path, 2: element index */
+                    sprintf(__('%1$s[%2$d].elements must be an array.', 'layrshift'), $path, $index)
                 );
             }
 

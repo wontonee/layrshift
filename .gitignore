@@ -3,3 +3,4 @@ composer.lock
 /docs/
 layrshift-*.zip
 .phpunit.result.cache
+../dist/

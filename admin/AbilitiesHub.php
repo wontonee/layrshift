@@ -182,7 +182,10 @@ final class AbilitiesHub {
 		<div
 			class="wrap layrshift-hub layrshift-wrap"
 			data-alloff-label="<?php esc_attr_e( 'All disabled', 'layrshift' ); ?>"
-			data-confirm-disable="<?php esc_attr_e( 'Disable the %d selected abilities? You can re-enable them anytime.', 'layrshift' ); ?>"
+			data-confirm-disable="<?php
+			/* translators: %d: number of selected abilities */
+			esc_attr_e( 'Disable the %d selected abilities? You can re-enable them anytime.', 'layrshift' );
+			?>"
 		>
 			<div class="wrap-title">
 				<div>

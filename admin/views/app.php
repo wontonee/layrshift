@@ -16,6 +16,8 @@
 
 defined( 'ABSPATH' ) || exit;
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals -- View template scope.
+
 $shell_mode = 'app';
 include LAYRSHIFT_PATH . 'admin/views/partials/app-shell-open.php';
 

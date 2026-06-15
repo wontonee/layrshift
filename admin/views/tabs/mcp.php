@@ -11,6 +11,8 @@
 
 defined( 'ABSPATH' ) || exit;
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals -- View template scope.
+
 $username          = (string) ( $mcp_connect['username'] ?? '' );
 $display_password  = (string) ( $mcp_connect['display_password'] ?? 'YOUR-APP-PASSWORD' );
 $new_password      = $mcp_connect['new_password'] ?? null;
@@ -33,10 +35,10 @@ $abilities_ok    = ! empty( $settings['enabled'] ) && ! empty( $settings['risk_a
 	<p class="layrshift-panel__lead"><?php esc_html_e( 'Connect Cursor, Claude Code, or any MCP client to this WordPress dev environment.', 'layrshift' ); ?></p>
 
 	<ul class="layrshift-checklist">
-		<li class="<?php echo $requirements_ok ? 'is-ok' : 'is-fail'; ?>">
+		<li class="<?php echo esc_attr( $requirements_ok ? 'is-ok' : 'is-fail' ); ?>">
 			<?php echo $requirements_ok ? esc_html__( 'All requirements met', 'layrshift' ) : esc_html( implode( '; ', $errors ) ); ?>
 		</li>
-		<li class="<?php echo $abilities_ok ? 'is-ok' : 'is-fail'; ?>">
+		<li class="<?php echo esc_attr( $abilities_ok ? 'is-ok' : 'is-fail' ); ?>">
 			<?php esc_html_e( 'AI Abilities enabled in Settings', 'layrshift' ); ?>
 			<?php if ( ! $abilities_ok ) : ?>
 				— <a href="<?php echo esc_url( \LayrShift\Admin\Admin::app_url( 'settings' ) ); ?>"><?php esc_html_e( 'Open Settings', 'layrshift' ); ?></a>
@@ -60,10 +62,20 @@ $abilities_ok    = ! empty( $settings['enabled'] ) && ! empty( $settings['risk_a
 
 		<?php if ( ! $password_status['available'] ) : ?>
 			<div class="layrshift-callout layrshift-callout--warning">
-				<?php echo esc_html( (string) $password_status['message'] ); ?>
+				<p><?php echo esc_html( (string) $password_status['message'] ); ?></p>
 				<?php if ( 'unsupported' === ( $password_status['reason'] ?? '' ) ) : ?>
 					<p class="layrshift-mcp-creds__hint"><?php esc_html_e( 'On local HTTP sites, add this to wp-config.php above the "That\'s all" line:', 'layrshift' ); ?></p>
 					<code class="layrshift-inline-code">define( 'WP_ENVIRONMENT_TYPE', 'local' );</code>
+				<?php elseif ( ! empty( $password_status['help_steps'] ) && is_array( $password_status['help_steps'] ) ) : ?>
+					<ol class="layrshift-mcp-creds__help-steps">
+						<?php foreach ( $password_status['help_steps'] as $step ) : ?>
+							<li><?php echo esc_html( (string) $step ); ?></li>
+						<?php endforeach; ?>
+					</ol>
+					<p class="layrshift-mcp-creds__hint">
+						<?php esc_html_e( 'Alternative: enable Allow Application Passwords under the Settings tab (administrators only, dev/staging).', 'layrshift' ); ?>
+						<a href="<?php echo esc_url( \LayrShift\Admin\Admin::app_url( 'settings' ) ); ?>"><?php esc_html_e( 'Open Settings', 'layrshift' ); ?></a>
+					</p>
 				<?php endif; ?>
 			</div>
 		<?php endif; ?>
@@ -113,10 +125,10 @@ $abilities_ok    = ! empty( $settings['enabled'] ) && ! empty( $settings['risk_a
 		</form>
 
 		<div class="layrshift-mcp-creds__existing">
-			<button type="button" class="layrshift-mcp-creds__toggle" id="layrshift-use-existing-toggle" aria-expanded="<?php echo $existing_open ? 'true' : 'false'; ?>" aria-controls="layrshift-use-existing-field">
+			<button type="button" class="layrshift-mcp-creds__toggle" id="layrshift-use-existing-toggle" aria-expanded="<?php echo esc_attr( $existing_open ? 'true' : 'false' ); ?>" aria-controls="layrshift-use-existing-field">
 				<?php esc_html_e( 'I already have an application password', 'layrshift' ); ?>
 			</button>
-			<div id="layrshift-use-existing-field" class="layrshift-mcp-creds__existing-panel" <?php echo $existing_open ? '' : 'hidden'; ?>>
+			<div id="layrshift-use-existing-field" class="layrshift-mcp-creds__existing-panel"<?php echo $existing_open ? '' : ' hidden'; ?>>
 				<form method="post" action="<?php echo esc_url( \LayrShift\Admin\Admin::app_url( 'mcp' ) ); ?>">
 					<?php wp_nonce_field( 'layrshift_use_existing_password' ); ?>
 					<div class="layrshift-field">
@@ -200,7 +212,7 @@ $abilities_ok    = ! empty( $settings['enabled'] ) && ! empty( $settings['risk_a
 	<div class="layrshift-studio-verify">
 		<h3 class="layrshift-section-label"><?php esc_html_e( 'Verify connection', 'layrshift' ); ?></h3>
 		<p class="layrshift-mcp-creds__hint"><?php esc_html_e( 'Restart your MCP client, then ask it to run:', 'layrshift' ); ?></p>
-		<?php if ( class_exists( 'LayrShift\\Abilities\\ExecutePhp' ) ) : ?>
+		<?php if ( \LayrShift\Plugin::has_execute_php_ability() ) : ?>
 			<code class="layrshift-inline-code layrshift-inline-code--block">layrshift/execute-php → return get_bloginfo('name');</code>
 		<?php else : ?>
 			<code class="layrshift-inline-code layrshift-inline-code--block">layrshift/read-file → path: wp-config.php</code>

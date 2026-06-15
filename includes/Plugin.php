@@ -35,15 +35,16 @@ final class Plugin {
 	}
 
 	private function __construct() {
+		ApplicationPasswords::init();
 		Upgrade::init();
 		CrashRecovery::init();
 		Sandbox::init();
+		PluginCheck::init();
 		McpBootstrap::init();
 		SkillsBootstrap::init();
 		AbilityPolicy::init();
 		GutenbergLoader::init_runtime();
 
-		add_action( 'init', array( $this, 'on_init' ) );
 		add_action( 'rest_api_init', array( $this, 'bootstrap_mcp_adapter' ), 14 );
 		add_action( 'wp_abilities_api_init', array( AbilitiesRegistry::class, 'register' ) );
 		add_action( 'wp_abilities_api_init', array( DiscoverAbilities::class, 'register' ), 100 );
@@ -70,10 +71,6 @@ final class Plugin {
 		\WP\MCP\Core\McpAdapter::instance()->init();
 	}
 
-	public function on_init(): void {
-		load_plugin_textdomain( 'layrshift', false, dirname( plugin_basename( LAYRSHIFT_FILE ) ) . '/languages' );
-	}
-
 	public static function activate(): void {
 		self::migrate_legacy_options();
 
@@ -84,6 +81,7 @@ final class Plugin {
 			'https_enforcement'       => true,
 			'restrict_core_deletion'  => true,
 			'risk_acknowledged'       => false,
+			'enable_application_passwords' => false,
 		);
 
 		if ( false === get_option( 'layrshift_settings' ) ) {
@@ -148,6 +146,7 @@ final class Plugin {
 			'https_enforcement'       => true,
 			'restrict_core_deletion'  => true,
 			'risk_acknowledged'       => false,
+			'enable_application_passwords' => false,
 		);
 
 		$settings = get_option( 'layrshift_settings', array() );
@@ -249,5 +248,13 @@ final class Plugin {
 
 	public static function meets_requirements(): bool {
 		return null === self::get_dependency_error();
+	}
+
+	public static function has_execute_php_ability(): bool {
+		return is_readable( LAYRSHIFT_PATH . 'abilities/ExecutePhp.php' );
+	}
+
+	public static function has_wp_cli_ability(): bool {
+		return is_readable( LAYRSHIFT_PATH . 'abilities/RunWpCli.php' );
 	}
 }

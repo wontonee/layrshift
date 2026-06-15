@@ -196,6 +196,7 @@ final class RunWpCli {
 	 * @return array{content: string, bytes_read: int, truncated: bool}|\WP_Error
 	 */
 	private static function read_log_slice( string $log_file, int $offset, int $limit ) {
+		// phpcs:disable WordPress.WP.AlternativeFunctions.file_system_operations_fopen,WordPress.WP.AlternativeFunctions.file_system_operations_fread,WordPress.WP.AlternativeFunctions.file_system_operations_fclose
 		$size = (int) filesize( $log_file );
 		if ( $offset >= $size ) {
 			return array( 'content' => '', 'bytes_read' => 0, 'truncated' => false );
@@ -203,7 +204,14 @@ final class RunWpCli {
 
 		$handle = fopen( $log_file, 'rb' );
 		if ( false === $handle ) {
-			return new \WP_Error( 'read_failed', sprintf( __( 'Could not open log file: %s', 'layrshift' ), $log_file ) );
+			return new \WP_Error(
+				'read_failed',
+				sprintf(
+					/* translators: %s: log file path */
+					__( 'Could not open log file: %s', 'layrshift' ),
+					$log_file
+				)
+			);
 		}
 
 		if ( $offset > 0 ) {
@@ -215,8 +223,16 @@ final class RunWpCli {
 		fclose( $handle );
 
 		if ( false === $content ) {
-			return new \WP_Error( 'read_failed', sprintf( __( 'Could not read log file: %s', 'layrshift' ), $log_file ) );
+			return new \WP_Error(
+				'read_failed',
+				sprintf(
+					/* translators: %s: log file path */
+					__( 'Could not read log file: %s', 'layrshift' ),
+					$log_file
+				)
+			);
 		}
+		// phpcs:enable
 
 		$bytes_read = strlen( $content );
 		$truncated  = -1 !== $limit && ( $offset + $bytes_read ) < $size;
@@ -280,6 +296,7 @@ final class RunWpCli {
 		);
 
 		$pipes   = array();
+		// phpcs:ignore Generic.PHP.ForbiddenFunctions.Found -- WP-CLI subprocess required for run-wp-cli ability.
 		$process = proc_open( $cmd, $descriptorspec, $pipes, ABSPATH );
 		if ( ! is_resource( $process ) ) {
 			return array(
@@ -290,9 +307,11 @@ final class RunWpCli {
 			);
 		}
 
+		// phpcs:disable WordPress.WP.AlternativeFunctions.file_system_operations_fclose
 		if ( isset( $pipes[0] ) && is_resource( $pipes[0] ) ) {
 			fclose( $pipes[0] );
 		}
+		// phpcs:enable
 
 		list( $stdout, $stderr ) = self::collect_process_output( $pipes[1] ?? null, $pipes[2] ?? null );
 		$exit_code               = proc_close( $process );
@@ -318,7 +337,11 @@ final class RunWpCli {
 		if ( false === file_put_contents( $log_file, '' ) ) {
 			return array(
 				'success' => false,
-				'stderr'  => sprintf( __( 'Failed to create log file: %s', 'layrshift' ), $log_file ),
+				'stderr'  => sprintf(
+					/* translators: %s: log file path */
+					__( 'Failed to create log file: %s', 'layrshift' ),
+					$log_file
+				),
 			);
 		}
 
@@ -372,6 +395,7 @@ final class RunWpCli {
 
 		while ( is_resource( $stdout_pipe ) || is_resource( $stderr_pipe ) ) {
 			$read = array();
+			// phpcs:disable WordPress.WP.AlternativeFunctions.file_system_operations_fclose
 			if ( is_resource( $stdout_pipe ) ) {
 				if ( feof( $stdout_pipe ) ) {
 					fclose( $stdout_pipe );
@@ -388,6 +412,7 @@ final class RunWpCli {
 					$read[] = $stderr_pipe;
 				}
 			}
+			// phpcs:enable
 
 			if ( array() === $read ) {
 				break;

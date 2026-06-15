@@ -57,7 +57,7 @@ final class Sandbox {
 	public static function disable_safe_mode(): void {
 		$flag = self::get_directory() . '/safe-mode.flag';
 		if ( file_exists( $flag ) ) {
-			unlink( $flag );
+			wp_delete_file( $flag );
 		}
 	}
 
@@ -202,6 +202,7 @@ final class Sandbox {
 			return new \WP_Error( 'layrshift_not_found', __( 'Sandbox file not found.', 'layrshift' ) );
 		}
 
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.rename_rename -- Sandbox file enable/disable toggle.
 		if ( ! rename( $source, $target ) ) {
 			return new \WP_Error( 'layrshift_disable_failed', __( 'Could not disable sandbox file.', 'layrshift' ) );
 		}
@@ -219,6 +220,7 @@ final class Sandbox {
 			return new \WP_Error( 'layrshift_not_found', __( 'Disabled sandbox file not found.', 'layrshift' ) );
 		}
 
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.rename_rename -- Sandbox file enable/disable toggle.
 		if ( ! rename( $source, $target ) ) {
 			return new \WP_Error( 'layrshift_enable_failed', __( 'Could not enable sandbox file.', 'layrshift' ) );
 		}

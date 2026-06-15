@@ -50,7 +50,11 @@ function get_target_post(int $post_id): WP_Post|WP_Error
 
     $post = get_post($post_id);
     if (!$post instanceof WP_Post) {
-        return new WP_Error('yoast_post_not_found', sprintf(__('Post %d was not found.', 'layrshift'), $post_id));
+        return new WP_Error('yoast_post_not_found', sprintf(
+            /* translators: %d: post ID */
+            __('Post %d was not found.', 'layrshift'),
+            $post_id
+        ));
     }
 
     return $post;
@@ -133,6 +137,7 @@ function write_post_seo(int $post_id, array $fields): true|WP_Error
         wpseo_save_postdata($post_id);
     }
 
+    // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Yoast SEO hook.
     do_action('wpseo_save_indexable', $post_id, get_post($post_id), true);
 
     return true;

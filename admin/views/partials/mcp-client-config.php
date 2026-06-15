@@ -9,6 +9,8 @@
 
 defined( 'ABSPATH' ) || exit;
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals -- View template scope.
+
 $mcp_url                 = (string) ( $mcp_connect['mcp_url'] ?? '' );
 $username                = (string) ( $mcp_connect['username'] ?? '' );
 $display_password        = (string) ( $mcp_connect['display_password'] ?? 'YOUR-APP-PASSWORD' );

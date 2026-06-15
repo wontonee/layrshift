@@ -40,7 +40,7 @@ final class ExecutePhp {
 				$return = null;
 
 				try {
-					$return = eval( $code ); // phpcs:ignore Squiz.PHP.Eval.Discouraged
+					$return = eval( $code ); // phpcs:ignore Generic.PHP.ForbiddenFunctions.Found -- Core execute-php ability.
 				} catch ( \Throwable $e ) {
 					$error = $e->getMessage();
 				}

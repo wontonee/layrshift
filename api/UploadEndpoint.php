@@ -86,7 +86,7 @@ final class UploadEndpoint {
 			return new \WP_Error( 'layrshift_move_failed', __( 'Could not save uploaded file.', 'layrshift' ), array( 'status' => 500 ) );
 		}
 
-		@unlink( $tmp_name );
+		wp_delete_file( $tmp_name );
 
 		return rest_ensure_response(
 			array(

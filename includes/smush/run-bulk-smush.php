@@ -55,6 +55,7 @@ function smush_run_bulk_smush(array $input): array|WP_Error
     }
 
     if (!$queued) {
+        // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Smush plugin hook.
         do_action('wp_smush_bulk_smush_start');
         $queued = true;
         $message = 'wp_smush_bulk_smush_start action fired';

@@ -241,6 +241,7 @@ function rest_stream_finalizer_runtime_events(WP_REST_Request $request): void
     $started_at = time();
 
     rest_send_sse_headers();
+    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SSE retry interval; value is an integer.
     echo 'retry: ' . (string) ($interval * 1000) . "\n\n";
     rest_flush_sse();
 
@@ -353,7 +354,9 @@ function rest_send_sse_headers(): void
 function rest_sse_event(string $event, array $data): void
 {
     $json = wp_json_encode($data, JSON_UNESCAPED_SLASHES);
+    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SSE event stream; payload is JSON-encoded.
     echo 'event: ' . $event . "\n";
+    // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SSE event stream; payload is JSON-encoded.
     echo 'data: ' . ($json !== false ? $json : '{}') . "\n\n";
     rest_flush_sse();
 }

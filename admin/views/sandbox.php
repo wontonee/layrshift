@@ -7,6 +7,8 @@
 
 defined( 'ABSPATH' ) || exit;
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals -- View template scope.
+
 $safe_mode  = \LayrShift\Sandbox::is_safe_mode_active();
 $shell_mode = 'dev';
 $dev_title  = __( 'Agent Sandbox', 'layrshift' );

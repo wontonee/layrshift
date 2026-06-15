@@ -16,7 +16,7 @@ tests/mcp-capability-matrix-results.json
 docs/MCP-TEST-REPORT.md
 docs/plans/
 README.md
-assets/
+/assets/
 abilities/ExecutePhp.php
 abilities/RunWpCli.php
 scripts/

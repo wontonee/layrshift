@@ -7,6 +7,8 @@
 
 defined( 'ABSPATH' ) || exit;
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals -- View template scope.
+
 $shell_mode = 'dev';
 $dev_title  = __( 'Activity Log', 'layrshift' );
 $active_tab = 'settings';

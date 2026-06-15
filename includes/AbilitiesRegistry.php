@@ -16,8 +16,10 @@ use LayrShift\Abilities\DeleteFile;
 use LayrShift\Abilities\DisableFile;
 use LayrShift\Abilities\EditFile;
 use LayrShift\Abilities\EnableFile;
+use LayrShift\Abilities\ExecutePhp;
 use LayrShift\Abilities\ListDirectory;
 use LayrShift\Abilities\ReadFile;
+use LayrShift\Abilities\RunWpCli;
 use LayrShift\Abilities\WriteFile;
 use LayrShift\Blogibot\Loader as BlogibotLoader;
 use LayrShift\Elementor\Loader as ElementorLoader;
@@ -46,8 +48,9 @@ final class AbilitiesRegistry {
 		}
 
 		CreateAdminAccessLink::register();
-		if ( class_exists( 'LayrShift\\Abilities\\RunWpCli' ) ) {
-			\LayrShift\Abilities\RunWpCli::register();
+		if ( Plugin::has_wp_cli_ability() ) {
+			require_once LAYRSHIFT_PATH . 'abilities/RunWpCli.php';
+			RunWpCli::register();
 		}
 		GutenbergLoader::register_abilities();
 		ElementorLoader::register_abilities();
@@ -61,7 +64,7 @@ final class AbilitiesRegistry {
 	 * @return array<string, array<string, mixed>>
 	 */
 	public static function tool_names(): array {
-		$wp_cli = class_exists( 'LayrShift\\Abilities\\RunWpCli' )
+		$wp_cli = Plugin::has_wp_cli_ability()
 			? array( 'layrshift/run-wp-cli', 'layrshift/get-wp-cli-job' )
 			: array();
 
@@ -253,12 +256,13 @@ final class AbilitiesRegistry {
 			),
 		);
 
-		if ( class_exists( 'LayrShift\\Abilities\\ExecutePhp' ) ) {
+		if ( Plugin::has_execute_php_ability() ) {
+			require_once LAYRSHIFT_PATH . 'abilities/ExecutePhp.php';
 			$definitions['layrshift/execute-php'] = array(
 				'label'               => __( 'Execute PHP', 'layrshift' ),
 				'description'         => __( 'Execute PHP code with full access to the WordPress environment including $wpdb, all WordPress functions, and all active plugins.', 'layrshift' ),
 				'category'            => AbilityCategories::CODE_EXECUTION,
-				'execute_callback'    => array( 'LayrShift\\Abilities\\ExecutePhp', 'execute' ),
+				'execute_callback'    => array( ExecutePhp::class, 'execute' ),
 				'permission_callback' => array( Auth::class, 'check_ability_permission' ),
 				'input_schema'        => array(
 					'type'       => 'object',

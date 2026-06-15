@@ -10,18 +10,20 @@ defined( 'WP_UNINSTALL_PLUGIN' ) || exit;
 delete_option( 'layrshift_settings' );
 delete_option( 'layrshift_ability_log' );
 
-$sandbox = WP_CONTENT_DIR . '/layrshift-sandbox';
-if ( is_dir( $sandbox ) ) {
-	$iterator = new RecursiveIteratorIterator(
-		new RecursiveDirectoryIterator( $sandbox, RecursiveDirectoryIterator::SKIP_DOTS ),
+$layrshift_sandbox = WP_CONTENT_DIR . '/layrshift-sandbox';
+if ( is_dir( $layrshift_sandbox ) ) {
+	// phpcs:disable WordPress.WP.AlternativeFunctions.file_system_operations_rmdir,WordPress.WP.AlternativeFunctions.unlink_unlink -- Recursive sandbox cleanup on uninstall.
+	$layrshift_iterator = new RecursiveIteratorIterator(
+		new RecursiveDirectoryIterator( $layrshift_sandbox, RecursiveDirectoryIterator::SKIP_DOTS ),
 		RecursiveIteratorIterator::CHILD_FIRST
 	);
-	foreach ( $iterator as $item ) {
-		if ( $item->isDir() ) {
-			rmdir( $item->getPathname() );
+	foreach ( $layrshift_iterator as $layrshift_item ) {
+		if ( $layrshift_item->isDir() ) {
+			rmdir( $layrshift_item->getPathname() );
 		} else {
-			unlink( $item->getPathname() );
+			unlink( $layrshift_item->getPathname() );
 		}
 	}
-	rmdir( $sandbox );
+	rmdir( $layrshift_sandbox );
+	// phpcs:enable
 }

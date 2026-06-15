@@ -121,7 +121,11 @@ function elementor_save_document(array $input): array|WP_Error
     if ($saved === false) {
         return new WP_Error(
             'elementor_save_failed',
-            sprintf(__('Elementor failed to save document %d.', 'layrshift'), $post_id)
+            sprintf(
+                /* translators: %d: post ID */
+                __('Elementor failed to save document %d.', 'layrshift'),
+                $post_id
+            )
         );
     }
 

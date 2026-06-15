@@ -74,16 +74,18 @@ function list_unsmushed_media(int $limit): array
     $limit = max(1, min(100, $limit));
 
     // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+    $like = $wpdb->esc_like( 'image/' ) . '%';
     $ids = $wpdb->get_col(
         $wpdb->prepare(
             "SELECT p.ID
             FROM {$wpdb->posts} p
             LEFT JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id AND pm.meta_key = 'wp-smush-lossy'
             WHERE p.post_type = 'attachment'
-              AND p.post_mime_type LIKE 'image/%'
+              AND p.post_mime_type LIKE %s
               AND pm.meta_id IS NULL
             ORDER BY p.ID DESC
             LIMIT %d",
+            $like,
             $limit
         )
     );

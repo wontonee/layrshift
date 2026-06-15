@@ -91,7 +91,11 @@ function elementor_get_document(array $input): array|WP_Error
     if (!$post instanceof \WP_Post) {
         return new WP_Error(
             'elementor_document_not_found',
-            sprintf(__('Post %d was not found.', 'layrshift'), $post_id)
+            sprintf(
+                /* translators: %d: post ID */
+                __('Post %d was not found.', 'layrshift'),
+                $post_id
+            )
         );
     }
 

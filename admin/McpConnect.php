@@ -9,6 +9,8 @@ declare( strict_types=1 );
 
 namespace LayrShift\Admin;
 
+use LayrShift\ApplicationPasswords;
+
 final class McpConnect {
 
 	private const PASSWORD_PREFIX = 'LayrShift';
@@ -500,27 +502,7 @@ final class McpConnect {
 	 * @return array{available: bool, reason: string, message: string}
 	 */
 	public static function get_password_status(): array {
-		if ( wp_is_application_passwords_available() ) {
-			return array(
-				'available' => true,
-				'reason'    => 'available',
-				'message'   => '',
-			);
-		}
-
-		if ( ! wp_is_application_passwords_supported() ) {
-			return array(
-				'available' => false,
-				'reason'    => 'unsupported',
-				'message'   => __( 'Application Passwords require HTTPS or WP_ENVIRONMENT_TYPE set to "local".', 'layrshift' ),
-			);
-		}
-
-		return array(
-			'available' => false,
-			'reason'    => 'filtered',
-			'message'   => __( 'Application Passwords have been disabled on this site, likely by a security plugin. Re-enable them in your security plugin settings to continue.', 'layrshift' ),
-		);
+		return ApplicationPasswords::get_status();
 	}
 
 	/**

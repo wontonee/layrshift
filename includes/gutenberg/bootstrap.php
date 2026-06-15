@@ -585,7 +585,11 @@ function target_title(WP_Post $target): string
 {
     $title = trim($target->post_title);
 
-    return $title !== '' ? $title : sprintf(__('(no title) #%d', 'layrshift'), $target->ID);
+    return $title !== '' ? $title : sprintf(
+        /* translators: %d: post ID */
+        __('(no title) #%d', 'layrshift'),
+        $target->ID
+    );
 }
 
 function content_hash(string $content): string
@@ -900,7 +904,11 @@ function batch_label(WP_Post $batch): string
 {
     $label = trim($batch->post_title);
 
-    return $label !== '' ? $label : sprintf(__('Gutenberg batch #%d', 'layrshift'), $batch->ID);
+    return $label !== '' ? $label : sprintf(
+        /* translators: %d: batch ID */
+        __('Gutenberg batch #%d', 'layrshift'),
+        $batch->ID
+    );
 }
 
 function user_instruction(WP_Post $batch): string
@@ -1042,7 +1050,11 @@ function shape_item(WP_Post $item): array
         'target_type' => meta_string($item->ID, META_TARGET_TYPE),
         'target_title' => $target instanceof WP_Post
             ? target_title($target)
-            : sprintf(__('Missing target #%d', 'layrshift'), $target_id),
+            : sprintf(
+                /* translators: %d: target post ID */
+                __('Missing target #%d', 'layrshift'),
+                $target_id
+            ),
         'operation' => meta_string($item->ID, META_OPERATION),
         'status' => status($item->ID),
         'created_at' => $item->post_date_gmt,

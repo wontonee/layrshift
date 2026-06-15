@@ -200,6 +200,7 @@ final class Admin {
 			'https_enforcement'      => ! empty( $input['https_enforcement'] ),
 			'restrict_core_deletion' => ! empty( $input['restrict_core_deletion'] ),
 			'risk_acknowledged'      => ! empty( $input['risk_acknowledged'] ),
+			'enable_application_passwords' => ! empty( $input['enable_application_passwords'] ),
 		);
 
 		if ( isset( $input['pro'] ) && is_array( $input['pro'] ) ) {
@@ -315,10 +316,10 @@ final class Admin {
 			case 'delete':
 				$path = Sandbox::get_directory() . '/' . $filename;
 				if ( file_exists( $path ) ) {
-					unlink( $path );
+					wp_delete_file( $path );
 				}
 				if ( file_exists( $path . '.disabled' ) ) {
-					unlink( $path . '.disabled' );
+					wp_delete_file( $path . '.disabled' );
 				}
 				Sandbox::unregister_file( $filename );
 				break;
@@ -343,10 +344,10 @@ final class Admin {
 				foreach ( Sandbox::list_files() as $file ) {
 					$path = Sandbox::get_directory() . '/' . $file['filename'];
 					if ( file_exists( $path ) ) {
-						unlink( $path );
+						wp_delete_file( $path );
 					}
 					if ( file_exists( $path . '.disabled' ) ) {
-						unlink( $path . '.disabled' );
+						wp_delete_file( $path . '.disabled' );
 					}
 					Sandbox::unregister_file( (string) $file['filename'] );
 				}

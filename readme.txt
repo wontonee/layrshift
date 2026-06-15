@@ -4,7 +4,7 @@ Tags: mcp, ai, agent, development, cursor
 Requires at least: 6.9
 Tested up to: 7.0
 Requires PHP: 8.0
-Stable tag: 1.0.1
+Stable tag: 1.0.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,6 +58,13 @@ No. LayrShift is designed for dev/staging environments only.
 
 Any MCP-compatible client that supports HTTP transport with Application Password authentication.
 
+= Wordfence blocks Application Passwords. How do I fix it? =
+
+Wordfence disables Application Passwords by default. Either:
+
+1. **Wordfence → All Options → Brute Force Protection** — uncheck “Disable WordPress application passwords”, save, and reload LayrShift.
+2. Or in **LayrShift → Configuration → Settings**, enable **Allow Application Passwords** (requires AI Abilities enabled; administrators only).
+
 = Do I need to run Composer? =
 
 No. The WordPress.org package includes bundled dependencies.
@@ -69,6 +76,22 @@ No. The WordPress.org package includes bundled dependencies.
 3. Activity log of ability invocations
 
 == Changelog ==
+
+= 1.0.6 =
+* WordPress Plugin Check compliance: filesystem helpers, i18n placeholders, admin view escaping, and PHPCS fixes for wp.org submission.
+
+= 1.0.5 =
+* Fix fatal error on Linux hosts: correct Composer PSR-4 paths for Elementor, Yoast, Smush, VaultShift, and BlogiBot integration loaders.
+
+= 1.0.4 =
+* Wordfence / security-plugin support: detect blocked Application Passwords, show plugin-specific steps, optional LayrShift override for administrators.
+
+= 1.0.3 =
+* Fix PHP warnings when execute-php / WP-CLI abilities are omitted from the WordPress.org package (no autoload of missing classes).
+* Regenerate Composer autoload in release builds after excluding dev-only ability files.
+
+= 1.0.2 =
+* Fix release zip excluding admin CSS/JS (`assets/` distignore pattern matched `admin/assets/`).
 
 = 1.0.1 =
 * WordPress.org automated scan compliance: exclude code-execution abilities from the directory package, replace `move_uploaded_file`, omit dotfiles from the release zip, align readme plugin name with the plugin header.

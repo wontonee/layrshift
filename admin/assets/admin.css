@@ -316,6 +316,15 @@ body.layrshift-admin .wrap.layrshift-app > h2:first-child {
 	background: var(--ls-coral-soft);
 }
 
+.layrshift-mcp-creds__help-steps {
+	margin: 12px 0 0 20px;
+	padding: 0;
+}
+
+.layrshift-mcp-creds__help-steps li {
+	margin-bottom: 6px;
+}
+
 /* ── AI settings strip ── */
 .layrshift-strip {
 	margin-bottom: 28px;

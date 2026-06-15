@@ -11,6 +11,8 @@
 
 defined( 'ABSPATH' ) || exit;
 
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals -- View template scope.
+
 use LayrShift\Admin\Admin;
 
 $active_tab = $active_tab ?? 'mcp';
@@ -45,9 +47,9 @@ $tab_body_class = 'layrshift-tab-' . sanitize_html_class( $active_tab );
 			<nav class="layrshift-tabs" aria-label="<?php esc_attr_e( 'LayrShift sections', 'layrshift' ); ?>">
 				<?php foreach ( $tabs as $slug => $label ) : ?>
 					<a
-						class="layrshift-tabs__item<?php echo $slug === $active_tab ? ' is-active' : ''; ?>"
+						class="layrshift-tabs__item<?php echo esc_attr( $slug === $active_tab ? ' is-active' : '' ); ?>"
 						href="<?php echo esc_url( Admin::app_url( $slug ) ); ?>"
-						<?php echo $slug === $active_tab ? ' aria-current="page"' : ''; ?>
+						<?php if ( $slug === $active_tab ) : ?> aria-current="page"<?php endif; ?>
 					><?php echo esc_html( $label ); ?></a>
 				<?php endforeach; ?>
 			</nav>

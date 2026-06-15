@@ -51,7 +51,7 @@ final class DeleteFile {
 					}
 					$deleted = self::delete_directory( $path );
 				} else {
-					if ( unlink( $path ) ) {
+					if ( wp_delete_file( $path ) ) {
 						$deleted = 1;
 					}
 				}
@@ -73,6 +73,7 @@ final class DeleteFile {
 	}
 
 	private static function delete_directory( string $dir ): int {
+		// phpcs:disable WordPress.WP.AlternativeFunctions.file_system_operations_rmdir,WordPress.WP.AlternativeFunctions.unlink_unlink -- Intentional recursive delete ability.
 		$count = 0;
 		$items = new \RecursiveIteratorIterator(
 			new \RecursiveDirectoryIterator( $dir, \RecursiveDirectoryIterator::SKIP_DOTS ),
@@ -92,6 +93,8 @@ final class DeleteFile {
 		if ( rmdir( $dir ) ) {
 			++$count;
 		}
+
+		// phpcs:enable
 
 		return $count;
 	}

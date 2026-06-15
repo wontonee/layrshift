@@ -18,6 +18,11 @@
         "psr-4": {
             "LayrShift\\": "includes/",
             "LayrShift\\Gutenberg\\": "includes/gutenberg/",
+            "LayrShift\\Elementor\\": "includes/elementor/",
+            "LayrShift\\Yoast\\": "includes/yoast/",
+            "LayrShift\\Smush\\": "includes/smush/",
+            "LayrShift\\VaultShift\\": "includes/vaultshift/",
+            "LayrShift\\Blogibot\\": "includes/blogibot/",
             "LayrShift\\Abilities\\": "abilities/",
             "LayrShift\\Skills\\": "includes/skills/",
             "LayrShift\\Api\\": "api/",
