@@ -19,7 +19,7 @@ final class Instructions {
 	 */
 	public static function build(): string {
 		$lines = array(
-			'LayrShift (LayrSoft AI) gives you dev/staging access to this WordPress installation.',
+			'LayrShift gives you dev/staging access to this WordPress installation.',
 			'',
 			'## Environment',
 			'',

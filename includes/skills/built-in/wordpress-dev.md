@@ -7,7 +7,7 @@ enable_agentic: true
 
 # WordPress Dev via LayrShift
 
-Implementor playbook for LayrSoft AI development work on the connected site.
+Implementor playbook for LayrShift AI development work on the connected site.
 
 ## Start Here
 
