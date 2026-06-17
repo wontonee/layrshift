@@ -92,6 +92,54 @@ final class McpBootstrap {
 				'label'       => __( 'BlogiBot', 'layrshift' ),
 				'description' => __( 'BlogiBot content status, posts, and settings.', 'layrshift' ),
 			),
+			AbilityCategories::WP_ROCKET      => array(
+				'label'       => __( 'WP Rocket', 'layrshift' ),
+				'description' => __( 'WP Rocket cache status, settings, and purge operations.', 'layrshift' ),
+			),
+			AbilityCategories::MIGRATE_GURU   => array(
+				'label'       => __( 'Migrate Guru', 'layrshift' ),
+				'description' => __( 'Migrate Guru connection status and migration state.', 'layrshift' ),
+			),
+			AbilityCategories::LITESPEED      => array(
+				'label'       => __( 'LiteSpeed Cache', 'layrshift' ),
+				'description' => __( 'LiteSpeed Cache status, settings, and purge operations.', 'layrshift' ),
+			),
+			AbilityCategories::WP_OPTIMIZE    => array(
+				'label'       => __( 'WP-Optimize', 'layrshift' ),
+				'description' => __( 'WP-Optimize cache and optimization status and purge operations.', 'layrshift' ),
+			),
+			AbilityCategories::WP_FASTEST_CACHE => array(
+				'label'       => __( 'WP Fastest Cache', 'layrshift' ),
+				'description' => __( 'WP Fastest Cache status, settings, and purge operations.', 'layrshift' ),
+			),
+			AbilityCategories::WOOCOMMERCE      => array(
+				'label'       => __( 'WooCommerce', 'layrshift' ),
+				'description' => __( 'WooCommerce store status and product reads.', 'layrshift' ),
+			),
+			AbilityCategories::RANK_MATH        => array(
+				'label'       => __( 'Rank Math SEO', 'layrshift' ),
+				'description' => __( 'Read and update Rank Math SEO metadata and site settings.', 'layrshift' ),
+			),
+			AbilityCategories::GENESIS          => array(
+				'label'       => __( 'Genesis Framework', 'layrshift' ),
+				'description' => __( 'Genesis theme status, settings, and per-post meta.', 'layrshift' ),
+			),
+			AbilityCategories::ASTRA            => array(
+				'label'       => __( 'Astra', 'layrshift' ),
+				'description' => __( 'Astra theme settings and header/footer builder layouts.', 'layrshift' ),
+			),
+			AbilityCategories::CONTACT_FORM_7   => array(
+				'label'       => __( 'Contact Form 7', 'layrshift' ),
+				'description' => __( 'Contact Form 7 form discovery and inspection.', 'layrshift' ),
+			),
+			AbilityCategories::WORDFENCE        => array(
+				'label'       => __( 'Wordfence', 'layrshift' ),
+				'description' => __( 'Wordfence firewall and scan status (read-only).', 'layrshift' ),
+			),
+			AbilityCategories::UPDRAFTPLUS      => array(
+				'label'       => __( 'UpdraftPlus', 'layrshift' ),
+				'description' => __( 'UpdraftPlus backup history and schedule (read-only).', 'layrshift' ),
+			),
 		);
 
 		foreach ( $extra_categories as $slug => $config ) {

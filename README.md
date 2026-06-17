@@ -6,13 +6,13 @@
 
 **Forge WordPress with your AI agent.** LayrShift is an MCP (Model Context Protocol) server plugin for WordPress that lets tools like Cursor, Claude Code, and VS Code Copilot read and write your site, run sandboxed PHP, manage Gutenberg batches, and integrate with popular plugins — all through a authenticated HTTP API.
 
-> **Distribution:** LayrShift is **not** listed on the [WordPress.org plugin directory](https://wordpress.org/plugins/). **Download:** [layrshift-1.0.7.zip](https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-1.0.7.zip) · Source on [GitHub](https://github.com/wontonee/layrshift) (AGPL-3.0-or-later). Dev/staging only — filesystem access and administrator-level automation.
+> **Distribution:** LayrShift is **not** listed on the [WordPress.org plugin directory](https://wordpress.org/plugins/). **Download:** [layrshift-1.0.8.zip](https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-1.0.8.zip) · Source on [GitHub](https://github.com/wontonee/layrshift) (AGPL-3.0-or-later). Dev/staging only — filesystem access and administrator-level automation.
 
 > **Environment:** **Development and staging sites only.** Do not install on production.
 
 | | |
 |---|---|
-| **Version** | 1.0.7 |
+| **Version** | 1.0.8 |
 | **Requires** | WordPress 6.9+, PHP 8.0+ |
 | **License** | [GPL-2.0-or-later](LICENSE) |
 | **Author** | [Saju Gopal / Wontonee DigitalCraft LLP](https://wontonee.com) |
@@ -66,7 +66,7 @@ LayrShift is an **open-source (GPL)** GitHub distribution with **more built-in M
 
 | | **LayrShift** | **Novamira** |
 |---|:---:|:---:|
-| **Distribution** | Free — [download zip](https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-1.0.7.zip) | [novamira.ai](https://novamira.ai) (license / Pro) |
+| **Distribution** | Free — [download zip](https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-1.0.8.zip) | [novamira.ai](https://novamira.ai) (license / Pro) |
 | **WordPress.org directory** | No | No |
 | **License** | GPL-2.0-or-later | AGPL-3.0 (core) |
 | **Target environment** | Dev / staging only | Dev / staging only |
@@ -106,7 +106,7 @@ Counts are **registered MCP tools** when the relevant plugins are active and abi
 | **Skills API** | skill-get / write / edit / delete | ✅ | ✅ | ✅ |
 | **Discovery** | discover-abilities (+ instructions) | ✅ | ✅ | ✅ |
 
-**LayrShift totals (typical dev site):** ~**40+ MCP tools** from core + Gutenberg + integrations, plus ~**25 skill prompts**.  
+**LayrShift totals (typical dev site):** ~**60+ MCP tools** from core + Gutenberg + integrations, plus ~**37 skill prompts**.  
 **Novamira OSS core:** ~**27 MCP tools** (core + Gutenberg + skills API). Pro adds **dedicated tools per builder/plugin** on top.
 
 ### Built-in specializations (agent skills)
@@ -125,7 +125,13 @@ Skills are Markdown playbooks loaded via `layrshift/skill-get` (or `novamira/ski
 | `breakdance` | Breakdance | ✅ | — | ✅ |
 | `wpbakery` | WPBakery | ✅ | — | ✅ |
 | `etch` / `mosaic` | Etch, Mosaic | ✅ | — | ✅ |
-| `woocommerce` | Store / products / orders | ✅ | — | ✅ |
+| `woocommerce` | Store / products / orders | ✅ skill + **3 MCP tools** | — | ✅ |
+| `rank-math` | Rank Math SEO | ✅ skill + **3 MCP tools** | — | ✅ |
+| `genesis` | Genesis Framework theme | ✅ skill + **3 MCP tools** | — | ✅ |
+| `astra` | Astra theme | ✅ skill + **3 MCP tools** | — | ✅ |
+| `contact-form-7` | Contact Form 7 | ✅ skill + **3 MCP tools** | — | ✅ |
+| `wordfence` | Wordfence security | ✅ skill + **3 MCP tools** | — | ✅ |
+| `updraftplus` | UpdraftPlus backups | ✅ skill + **3 MCP tools** | — | ✅ |
 | `acf` | Advanced Custom Fields | ✅ | — | ✅ |
 | `jetengine` | JetEngine | ✅ | — | ✅ |
 | `meta-box` / `pods` / `acpt` / `ase` | Field / CPT plugins | ✅ | — | ✅ |
@@ -150,7 +156,7 @@ LayrShift optimizes for **breadth**: many integrations and playbooks in one free
 
 | | LayrShift | Novamira |
 |---|-----------|----------|
-| **Get it** | [Download zip](https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-1.0.7.zip) (`layrshift-x.y.z.zip`) | Purchase / license at novamira.ai |
+| **Get it** | [Download zip](https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-1.0.8.zip) (`layrshift-x.y.z.zip`) | Purchase / license at novamira.ai |
 | **Updates** | New zip per version on S3; changelog on [GitHub](https://github.com/wontonee/layrshift) | License server |
 | **Use in client projects** | GPL — standard WordPress plugin freedoms | AGPL core; check Pro terms |
 | **Why not WordPress.org?** | Filesystem + code execution = too powerful for directory defaults | Same |
@@ -215,14 +221,14 @@ Optional:
 
 ## Installation
 
-1. **Download** [layrshift-1.0.7.zip](https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-1.0.7.zip)  
+1. **Download** [layrshift-1.0.8.zip](https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-1.0.8.zip)  
    Also on [GitHub Releases](https://github.com/wontonee/layrshift/releases). Other S3 versions: `https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-x.y.z.zip`
 2. In WordPress admin: **Plugins → Add New → Upload Plugin**, choose the zip, and activate.
 3. Dependencies are already bundled — you do not need Composer or the command line.
 
 ### Verify installation
 
-After activation you should see **LayrShift** in the admin menu. If you see *“Run composer install in the plugin directory”*, the `vendor/` folder is missing — delete the plugin and install again from the [official release zip](https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-1.0.7.zip).
+After activation you should see **LayrShift** in the admin menu. If you see *“Run composer install in the plugin directory”*, the `vendor/` folder is missing — delete the plugin and install again from the [official release zip](https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-1.0.8.zip).
 
 ---
 
@@ -374,9 +380,21 @@ When the plugin below is **active**, LayrShift registers additional abilities (a
 |--------|-------------------|
 | **Elementor** | `layrshift/elementor-get-document`, `elementor-save-document`, `elementor-list-templates` |
 | **Yoast SEO** | `layrshift/yoast-get-post-seo`, `yoast-update-post-seo`, `yoast-get-site-settings` |
-| **Smush** | `layrshift/smush-get-stats`, `smush-list-unsmushed`, `smush-run-bulk-smush` |
+| **Smush** | `layrshift/smush-get-stats`, `smush-list-unsmushed`, `smush-optimize-attachment`, `smush-run-bulk-smush` |
+| **WP Rocket** | `layrshift/wp-rocket-get-status`, `wp-rocket-get-settings`, `wp-rocket-clear-cache` |
+| **LiteSpeed Cache** | `layrshift/litespeed-get-status`, `litespeed-get-settings`, `litespeed-purge-all` |
+| **WP-Optimize** | `layrshift/wp-optimize-get-status`, `wp-optimize-get-settings`, `wp-optimize-purge-cache` |
+| **WP Fastest Cache** | `layrshift/wp-fastest-cache-get-status`, `wp-fastest-cache-get-settings`, `wp-fastest-cache-clear-cache` |
+| **Migrate Guru** | `layrshift/migrate-guru-get-status`, `migrate-guru-get-connection-info`, `migrate-guru-get-migration-state` |
 | **VaultShift** | `layrshift/vaultshift-get-status`, `vaultshift-trigger-scan`, `vaultshift-list-activity` |
 | **BlogiBot** | `layrshift/blogibot-get-status`, `blogibot-list-posts`, `blogibot-get-settings` |
+| **WooCommerce** | `layrshift/woocommerce-get-status`, `woocommerce-list-products`, `woocommerce-get-product` |
+| **Rank Math SEO** | `layrshift/rank-math-get-post-seo`, `rank-math-update-post-seo`, `rank-math-get-site-settings` |
+| **Genesis Framework** | `layrshift/genesis-get-status`, `genesis-get-settings`, `genesis-get-post-meta` |
+| **Astra** | `layrshift/astra-get-status`, `astra-get-settings`, `astra-get-header-footer` |
+| **Contact Form 7** | `layrshift/contact-form-7-get-status`, `contact-form-7-list-forms`, `contact-form-7-get-form` |
+| **Wordfence** | `layrshift/wordfence-get-status`, `wordfence-get-scan-summary`, `wordfence-get-settings-summary` |
+| **UpdraftPlus** | `layrshift/updraftplus-get-status`, `updraftplus-list-backups`, `updraftplus-get-settings` |
 
 Each integration ships with a matching **skill** playbook the agent can load via `layrshift/skill-get`.
 
@@ -390,13 +408,13 @@ Built-in Markdown playbooks live in `includes/skills/built-in/`. They teach agen
 
 **Page builders (deep playbooks):** `elementor`, `bricks`, `divi`, `breakdance`, `wpbakery`, `etch`, `mosaic`
 
-**Themes:** `generatepress`, `kadence`
+**Themes:** `generatepress`, `kadence`, `genesis`, `astra`
 
 **Commerce & fields:** `woocommerce`, `acf`, `jetengine`, `meta-box`, `pods`, `acpt`, `ase`
 
 **Code:** `code-snippets`
 
-**Integrations:** `yoast`, `smush`, `vaultshift`, `blogibot`
+**Integrations:** `yoast`, `rank-math`, `smush`, `wp-rocket`, `litespeed`, `wp-optimize`, `wp-fastest-cache`, `migrate-guru`, `contact-form-7`, `wordfence`, `updraftplus`, `vaultshift`, `blogibot`
 
 Example: `layrshift/skill-get` with `{ "slug": "elementor" }` before editing Elementor templates.
 
@@ -463,7 +481,7 @@ Similar plugins (Solid Security, All In One WP Security) may need the same treat
 
 ### CSS/JS missing after install
 
-Use the official **release zip** from [layrshift-1.0.7.zip](https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-1.0.7.zip). Do not zip the plugin folder yourself — that often drops required CSS/JS files.
+Use the official **release zip** from [layrshift-1.0.8.zip](https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-1.0.8.zip). Do not zip the plugin folder yourself — that often drops required CSS/JS files.
 
 ### Composer / vendor errors
 
@@ -487,6 +505,8 @@ LayrShift also ships crash-recovery hooks to reduce white-screen risk during age
 
 See [readme.txt](readme.txt) for the full WordPress-style changelog, or the [GitHub repository](https://github.com/wontonee/layrshift) for source and issues.
 
+**1.0.8** — Tier 1 integrations: WooCommerce, Rank Math, Genesis Framework, Astra, Contact Form 7, Wordfence, UpdraftPlus (3 MCP abilities + skill each).
+
 **1.0.7** — AGPL-3.0 distribution, full-bleed README banner, admin menu icon fix, branding cleanup.
 
 **1.0.6** — Plugin Check / PHPCS compliance, admin escaping, GitHub distribution polish, Plugin Check ignore filters for local scans, release zip output moved to `../dist/`.
@@ -495,7 +515,7 @@ See [readme.txt](readme.txt) for the full WordPress-style changelog, or the [Git
 
 ## Support & contributing
 
-- **Download:** https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-1.0.7.zip
+- **Download:** https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-1.0.8.zip
 - **Issues:** [github.com/wontonee/layrshift/issues](https://github.com/wontonee/layrshift/issues)
 - **Source:** [github.com/wontonee/layrshift](https://github.com/wontonee/layrshift)
 - **Support:** [dev@wontonee.com](mailto:dev@wontonee.com)

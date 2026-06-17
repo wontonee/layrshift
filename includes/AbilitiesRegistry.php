@@ -21,12 +21,24 @@ use LayrShift\Abilities\ListDirectory;
 use LayrShift\Abilities\ReadFile;
 use LayrShift\Abilities\RunWpCli;
 use LayrShift\Abilities\WriteFile;
+use LayrShift\Astra\Loader as AstraLoader;
 use LayrShift\Blogibot\Loader as BlogibotLoader;
+use LayrShift\ContactForm7\Loader as ContactForm7Loader;
 use LayrShift\Elementor\Loader as ElementorLoader;
+use LayrShift\Genesis\Loader as GenesisLoader;
 use LayrShift\Gutenberg\Loader as GutenbergLoader;
+use LayrShift\LiteSpeed\Loader as LiteSpeedLoader;
+use LayrShift\MigrateGuru\Loader as MigrateGuruLoader;
+use LayrShift\RankMath\Loader as RankMathLoader;
 use LayrShift\Skills\Prompts;
 use LayrShift\Smush\Loader as SmushLoader;
+use LayrShift\UpdraftPlus\Loader as UpdraftPlusLoader;
 use LayrShift\VaultShift\Loader as VaultShiftLoader;
+use LayrShift\WooCommerce\Loader as WooCommerceLoader;
+use LayrShift\Wordfence\Loader as WordfenceLoader;
+use LayrShift\WpFastestCache\Loader as WpFastestCacheLoader;
+use LayrShift\WpOptimize\Loader as WpOptimizeLoader;
+use LayrShift\WpRocket\Loader as WpRocketLoader;
 use LayrShift\Yoast\Loader as YoastLoader;
 
 /**
@@ -58,6 +70,18 @@ final class AbilitiesRegistry {
 		SmushLoader::register_abilities();
 		VaultShiftLoader::register_abilities();
 		BlogibotLoader::register_abilities();
+		WpRocketLoader::register_abilities();
+		MigrateGuruLoader::register_abilities();
+		LiteSpeedLoader::register_abilities();
+		WpOptimizeLoader::register_abilities();
+		WpFastestCacheLoader::register_abilities();
+		WooCommerceLoader::register_abilities();
+		RankMathLoader::register_abilities();
+		GenesisLoader::register_abilities();
+		AstraLoader::register_abilities();
+		ContactForm7Loader::register_abilities();
+		WordfenceLoader::register_abilities();
+		UpdraftPlusLoader::register_abilities();
 	}
 
 	/**
@@ -78,6 +102,18 @@ final class AbilitiesRegistry {
 			SmushLoader::ability_names(),
 			VaultShiftLoader::ability_names(),
 			BlogibotLoader::ability_names(),
+			WpRocketLoader::ability_names(),
+			MigrateGuruLoader::ability_names(),
+			LiteSpeedLoader::ability_names(),
+			WpOptimizeLoader::ability_names(),
+			WpFastestCacheLoader::ability_names(),
+			WooCommerceLoader::ability_names(),
+			RankMathLoader::ability_names(),
+			GenesisLoader::ability_names(),
+			AstraLoader::ability_names(),
+			ContactForm7Loader::ability_names(),
+			WordfenceLoader::ability_names(),
+			UpdraftPlusLoader::ability_names(),
 			array(
 				'layrshift/skill-get',
 				'layrshift/skill-write',

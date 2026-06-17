@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace LayrShift\Smush;
+namespace LayrShift\RankMath;
 
 use LayrShift\Plugin;
 
@@ -15,11 +15,11 @@ final class Loader {
 
 		require_once __DIR__ . '/bootstrap.php';
 
-		if ( ! is_smush_available() ) {
+		if ( ! is_rank_math_available() ) {
 			return;
 		}
 
-		foreach ( array( 'get-stats.php', 'list-unsmushed.php', 'run-bulk-smush.php', 'optimize-attachment.php' ) as $file ) {
+		foreach ( array( 'get-post-seo.php', 'update-post-seo.php', 'get-site-settings.php' ) as $file ) {
 			require_once __DIR__ . '/' . $file;
 		}
 	}
@@ -28,15 +28,14 @@ final class Loader {
 	public static function ability_names(): array {
 		require_once __DIR__ . '/bootstrap.php';
 
-		if ( ! is_smush_available() ) {
+		if ( ! is_rank_math_available() ) {
 			return array();
 		}
 
 		return array(
-			'layrshift/smush-get-stats',
-			'layrshift/smush-list-unsmushed',
-			'layrshift/smush-run-bulk-smush',
-			'layrshift/smush-optimize-attachment',
+			'layrshift/rank-math-get-post-seo',
+			'layrshift/rank-math-update-post-seo',
+			'layrshift/rank-math-get-site-settings',
 		);
 	}
 }

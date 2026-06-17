@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace LayrShift\Smush;
+namespace LayrShift\LiteSpeed;
 
 use LayrShift\Plugin;
 
@@ -15,11 +15,11 @@ final class Loader {
 
 		require_once __DIR__ . '/bootstrap.php';
 
-		if ( ! is_smush_available() ) {
+		if ( ! is_litespeed_available() ) {
 			return;
 		}
 
-		foreach ( array( 'get-stats.php', 'list-unsmushed.php', 'run-bulk-smush.php', 'optimize-attachment.php' ) as $file ) {
+		foreach ( array( 'get-status.php', 'get-settings.php', 'purge-all.php' ) as $file ) {
 			require_once __DIR__ . '/' . $file;
 		}
 	}
@@ -28,15 +28,14 @@ final class Loader {
 	public static function ability_names(): array {
 		require_once __DIR__ . '/bootstrap.php';
 
-		if ( ! is_smush_available() ) {
+		if ( ! is_litespeed_available() ) {
 			return array();
 		}
 
 		return array(
-			'layrshift/smush-get-stats',
-			'layrshift/smush-list-unsmushed',
-			'layrshift/smush-run-bulk-smush',
-			'layrshift/smush-optimize-attachment',
+			'layrshift/litespeed-get-status',
+			'layrshift/litespeed-get-settings',
+			'layrshift/litespeed-purge-all',
 		);
 	}
 }

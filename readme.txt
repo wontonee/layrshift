@@ -4,7 +4,7 @@ Tags: mcp, ai, agent, development, cursor
 Requires at least: 6.9
 Tested up to: 7.0
 Requires PHP: 8.0
-Stable tag: 1.0.7
+Stable tag: 1.0.8
 License: AGPL-3.0-or-later
 License URI: https://www.gnu.org/licenses/agpl-3.0.html
 
@@ -26,7 +26,7 @@ LayrShift exposes a secure MCP (Model Context Protocol) server inside WordPress 
 
 Built on the official [WordPress MCP Adapter](https://github.com/WordPress/mcp-adapter) and Abilities API (WordPress 6.9+). Bundled Composer dependencies are included in the plugin package.
 
-Download: https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-1.0.7.zip. Source on [GitHub](https://github.com/wontonee/layrshift) (AGPL-3.0-or-later, same model as [Novamira](https://github.com/use-novamira/novamira)). Clone the repository and run `composer install` for development.
+Download: https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-1.0.8.zip. Source on [GitHub](https://github.com/wontonee/layrshift) (AGPL-3.0-or-later, same model as [Novamira](https://github.com/use-novamira/novamira)). Clone the repository and run `composer install` for development.
 
 == Security ==
 
@@ -45,7 +45,7 @@ Hardening included in this release:
 
 == Installation ==
 
-1. Download [layrshift-1.0.7.zip](https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-1.0.7.zip) or from [GitHub Releases](https://github.com/wontonee/layrshift/releases)
+1. Download [layrshift-1.0.8.zip](https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-1.0.8.zip) or from [GitHub Releases](https://github.com/wontonee/layrshift/releases)
 2. In wp-admin: Plugins → Add New → Upload Plugin, install, and activate.
 3. Open **LayrShift → Configuration**.
 4. On the **Settings** tab, acknowledge the dev/staging warning and enable **AI Abilities**.
@@ -76,7 +76,7 @@ No. The release zip includes bundled dependencies.
 
 = Where do I download LayrShift? =
 
-LayrShift is not on the WordPress.org plugin directory. Download https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-1.0.7.zip (or [GitHub Releases](https://github.com/wontonee/layrshift/releases)) and install via Plugins → Add New → Upload Plugin.
+LayrShift is not on the WordPress.org plugin directory. Download https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-1.0.8.zip (or [GitHub Releases](https://github.com/wontonee/layrshift/releases)) and install via Plugins → Add New → Upload Plugin.
 
 == Screenshots ==
 
@@ -85,6 +85,9 @@ LayrShift is not on the WordPress.org plugin directory. Download https://wontone
 3. Activity log of ability invocations
 
 == Changelog ==
+
+= 1.0.8 =
+* Tier 1 integrations: WooCommerce, Rank Math SEO, Genesis Framework, Astra, Contact Form 7, Wordfence, and UpdraftPlus — each with 3 MCP abilities and a built-in skill playbook.
 
 = 1.0.7 =
 * AGPL-3.0-or-later license, CONTRIBUTING.md, and GitHub Releases distribution (Novamira model).

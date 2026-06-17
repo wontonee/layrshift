@@ -14,7 +14,8 @@ Prefer **`layrshift/smush-*` abilities** for optimization workflows.
 1. `layrshift/skill-get` → `smush`
 2. `layrshift/smush-get-stats` — current stats and settings
 3. `layrshift/smush-list-unsmushed` — backlog before bulk runs
-4. `layrshift/smush-run-bulk-smush` — only after user confirms on large libraries
+4. `layrshift/smush-optimize-attachment` — single image by attachment ID
+5. `layrshift/smush-run-bulk-smush` — only after user confirms on large libraries
 
 ## Abilities
 
@@ -22,6 +23,7 @@ Prefer **`layrshift/smush-*` abilities** for optimization workflows.
 |------|---------|
 | Stats & settings | `layrshift/smush-get-stats` |
 | List pending images | `layrshift/smush-list-unsmushed` |
+| Optimize one image | `layrshift/smush-optimize-attachment` |
 | Bulk optimize | `layrshift/smush-run-bulk-smush` |
 
 ## Rules

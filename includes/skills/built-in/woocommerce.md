@@ -7,7 +7,22 @@ enable_agentic: true
 
 # WooCommerce via LayrShift
 
-Use WooCommerce CRUD APIs and data stores via `layrshift/execute-php`. Never insert raw SQL for products.
+Prefer **`layrshift/woocommerce-*` abilities** for store status and product reads. Use `execute-php` for writes (product creation, orders).
+
+## Start here
+
+1. `layrshift/skill-get` → `woocommerce`
+2. `layrshift/woocommerce-get-status` — version, currency, counts
+3. `layrshift/woocommerce-list-products` — browse catalog
+4. `layrshift/woocommerce-get-product` — single product detail
+
+## Abilities
+
+| Step | Ability |
+|------|---------|
+| Store status | `layrshift/woocommerce-get-status` |
+| List products | `layrshift/woocommerce-list-products` |
+| Product detail | `layrshift/woocommerce-get-product` |
 
 ## Probe
 
