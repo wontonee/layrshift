@@ -6,13 +6,13 @@
 
 **Forge WordPress with your AI agent.** LayrShift is an MCP (Model Context Protocol) server plugin for WordPress that lets tools like Cursor, Claude Code, and VS Code Copilot read and write your site, run sandboxed PHP, manage Gutenberg batches, and integrate with popular plugins — all through a authenticated HTTP API.
 
-> **Distribution:** LayrShift is **not** listed on the [WordPress.org plugin directory](https://wordpress.org/plugins/). Like other powerful agent plugins (e.g. Novamira), source lives on GitHub; **install only from the official release zip** because of its security profile (filesystem access, optional code execution, administrator-level automation). **Latest:** [layrshift-1.0.6.zip](https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-1.0.6.zip)
+> **Distribution:** LayrShift is **not** listed on the [WordPress.org plugin directory](https://wordpress.org/plugins/). **Download:** [layrshift-1.0.7.zip](https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-1.0.7.zip) · Source on [GitHub](https://github.com/wontonee/layrshift) (AGPL-3.0-or-later). Dev/staging only — filesystem access and administrator-level automation.
 
 > **Environment:** **Development and staging sites only.** Do not install on production.
 
 | | |
 |---|---|
-| **Version** | 1.0.6 |
+| **Version** | 1.0.7 |
 | **Requires** | WordPress 6.9+, PHP 8.0+ |
 | **License** | [GPL-2.0-or-later](LICENSE) |
 | **Author** | [Saju Gopal / Wontonee DigitalCraft LLP](https://wontonee.com) |
@@ -66,7 +66,7 @@ LayrShift is an **open-source (GPL)** GitHub distribution with **more built-in M
 
 | | **LayrShift** | **Novamira** |
 |---|:---:|:---:|
-| **Distribution** | Free — [download zip](https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-1.0.6.zip) | [novamira.ai](https://novamira.ai) (license / Pro) |
+| **Distribution** | Free — [download zip](https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-1.0.7.zip) | [novamira.ai](https://novamira.ai) (license / Pro) |
 | **WordPress.org directory** | No | No |
 | **License** | GPL-2.0-or-later | AGPL-3.0 (core) |
 | **Target environment** | Dev / staging only | Dev / staging only |
@@ -150,7 +150,7 @@ LayrShift optimizes for **breadth**: many integrations and playbooks in one free
 
 | | LayrShift | Novamira |
 |---|-----------|----------|
-| **Get it** | [Download zip](https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-1.0.6.zip) (`layrshift-x.y.z.zip`) | Purchase / license at novamira.ai |
+| **Get it** | [Download zip](https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-1.0.7.zip) (`layrshift-x.y.z.zip`) | Purchase / license at novamira.ai |
 | **Updates** | New zip per version on S3; changelog on [GitHub](https://github.com/wontonee/layrshift) | License server |
 | **Use in client projects** | GPL — standard WordPress plugin freedoms | AGPL core; check Pro terms |
 | **Why not WordPress.org?** | Filesystem + code execution = too powerful for directory defaults | Same |
@@ -215,14 +215,14 @@ Optional:
 
 ## Installation
 
-1. **Download** the release zip — latest: **[layrshift-1.0.6.zip](https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-1.0.6.zip)**  
-   Other versions: `https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-x.y.z.zip`
+1. **Download** [layrshift-1.0.7.zip](https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-1.0.7.zip)  
+   Also on [GitHub Releases](https://github.com/wontonee/layrshift/releases). Other S3 versions: `https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-x.y.z.zip`
 2. In WordPress admin: **Plugins → Add New → Upload Plugin**, choose the zip, and activate.
 3. Dependencies are already bundled — you do not need Composer or the command line.
 
 ### Verify installation
 
-After activation you should see **LayrShift** in the admin menu. If you see *“Run composer install in the plugin directory”*, the `vendor/` folder is missing — delete the plugin and install again from the [official release zip](https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-1.0.6.zip).
+After activation you should see **LayrShift** in the admin menu. If you see *“Run composer install in the plugin directory”*, the `vendor/` folder is missing — delete the plugin and install again from the [official release zip](https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-1.0.7.zip).
 
 ---
 
@@ -463,7 +463,7 @@ Similar plugins (Solid Security, All In One WP Security) may need the same treat
 
 ### CSS/JS missing after install
 
-Use the official **release zip** from [layrshift-1.0.6.zip](https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-1.0.6.zip). Do not zip the plugin folder yourself — that often drops required CSS/JS files.
+Use the official **release zip** from [layrshift-1.0.7.zip](https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-1.0.7.zip). Do not zip the plugin folder yourself — that often drops required CSS/JS files.
 
 ### Composer / vendor errors
 
@@ -487,13 +487,15 @@ LayrShift also ships crash-recovery hooks to reduce white-screen risk during age
 
 See [readme.txt](readme.txt) for the full WordPress-style changelog, or the [GitHub repository](https://github.com/wontonee/layrshift) for source and issues.
 
+**1.0.7** — AGPL-3.0 distribution, full-bleed README banner, admin menu icon fix, branding cleanup.
+
 **1.0.6** — Plugin Check / PHPCS compliance, admin escaping, GitHub distribution polish, Plugin Check ignore filters for local scans, release zip output moved to `../dist/`.
 
 ---
 
 ## Support & contributing
 
-- **Download:** [layrshift-1.0.6.zip](https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-1.0.6.zip)
+- **Download:** https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-1.0.7.zip
 - **Issues:** [github.com/wontonee/layrshift/issues](https://github.com/wontonee/layrshift/issues)
 - **Source:** [github.com/wontonee/layrshift](https://github.com/wontonee/layrshift)
 - **Support:** [dev@wontonee.com](mailto:dev@wontonee.com)
