@@ -2,7 +2,7 @@
 
 **Forge WordPress with your AI agent.** LayrShift is an MCP (Model Context Protocol) server plugin for WordPress that lets tools like Cursor, Claude Code, and VS Code Copilot read and write your site, run sandboxed PHP, manage Gutenberg batches, and integrate with popular plugins — all through a authenticated HTTP API.
 
-> **Distribution:** LayrShift is **not** listed on the [WordPress.org plugin directory](https://wordpress.org/plugins/). Like other powerful agent plugins (e.g. Novamira), it is distributed here on GitHub because of its security profile: filesystem access, optional code execution, and administrator-level automation. **Install only from official [GitHub Releases](https://github.com/wontonee/layrshift/releases).**
+> **Distribution:** LayrShift is **not** listed on the [WordPress.org plugin directory](https://wordpress.org/plugins/). Like other powerful agent plugins (e.g. Novamira), source lives on GitHub; **install only from the official release zip** because of its security profile (filesystem access, optional code execution, administrator-level automation). **Latest:** [layrshift-1.0.6.zip](https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-1.0.6.zip)
 
 > **Environment:** **Development and staging sites only.** Do not install on production.
 
@@ -46,7 +46,7 @@ WordPress.org’s plugin review is designed for code that runs safely on million
 - Signed upload URLs for plugins, themes, and media
 - Persistent sandbox PHP with autoload
 
-That power is appropriate for **local dev, staging, and agency workflows** where an administrator explicitly opts in. It is not appropriate as a one-click install for every production site. We publish signed release zips on GitHub so you can review the package, pin a version, and install when you understand the risk.
+That power is appropriate for **local dev, staging, and agency workflows** where an administrator explicitly opts in. It is not appropriate as a one-click install for every production site. We publish versioned release zips on S3 so you can review the package, pin a version, and install when you understand the risk.
 
 **AI Abilities are disabled by default** until an administrator acknowledges the warning and enables them in Settings.
 
@@ -62,7 +62,7 @@ LayrShift is an **open-source (GPL)** GitHub distribution with **more built-in M
 
 | | **LayrShift** | **Novamira** |
 |---|:---:|:---:|
-| **Distribution** | Free on [GitHub Releases](https://github.com/wontonee/layrshift/releases) | [novamira.ai](https://novamira.ai) (license / Pro) |
+| **Distribution** | Free — [download zip](https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-1.0.6.zip) | [novamira.ai](https://novamira.ai) (license / Pro) |
 | **WordPress.org directory** | No | No |
 | **License** | GPL-2.0-or-later | AGPL-3.0 (core) |
 | **Target environment** | Dev / staging only | Dev / staging only |
@@ -146,8 +146,8 @@ LayrShift optimizes for **breadth**: many integrations and playbooks in one free
 
 | | LayrShift | Novamira |
 |---|-----------|----------|
-| **Get it** | Download zip from GitHub Releases | Purchase / license at novamira.ai |
-| **Updates** | GitHub Releases | License server |
+| **Get it** | [Download zip](https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-1.0.6.zip) (`layrshift-x.y.z.zip`) | Purchase / license at novamira.ai |
+| **Updates** | New zip per version on S3; changelog on [GitHub](https://github.com/wontonee/layrshift) | License server |
 | **Use in client projects** | GPL — standard WordPress plugin freedoms | AGPL core; check Pro terms |
 | **Why not WordPress.org?** | Filesystem + code execution = too powerful for directory defaults | Same |
 
@@ -211,13 +211,14 @@ Optional:
 
 ## Installation
 
-1. Open **[Releases](https://github.com/wontonee/layrshift/releases)** and download `layrshift-x.y.z.zip` for the version you want.
+1. **Download** the release zip — latest: **[layrshift-1.0.6.zip](https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-1.0.6.zip)**  
+   Other versions: `https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-x.y.z.zip`
 2. In WordPress admin: **Plugins → Add New → Upload Plugin**, choose the zip, and activate.
 3. Dependencies are already bundled — you do not need Composer or the command line.
 
 ### Verify installation
 
-After activation you should see **LayrShift** in the admin menu. If you see *“Run composer install in the plugin directory”*, the `vendor/` folder is missing — delete the plugin and install again from the official [release zip](https://github.com/wontonee/layrshift/releases).
+After activation you should see **LayrShift** in the admin menu. If you see *“Run composer install in the plugin directory”*, the `vendor/` folder is missing — delete the plugin and install again from the [official release zip](https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-1.0.6.zip).
 
 ---
 
@@ -323,7 +324,7 @@ Abilities appear in MCP as tools with the `layrshift/` prefix (and integration-s
 
 ### Code execution & CLI (not in standard releases)
 
-These abilities are **not included** in the release zip from GitHub (safer default). You still have the full filesystem, content, and integration toolset below.
+These abilities are **not included** in the standard release zip (safer default). You still have the full filesystem, content, and integration toolset below.
 
 | Ability | Description |
 |---------|-------------|
@@ -458,11 +459,11 @@ Similar plugins (Solid Security, All In One WP Security) may need the same treat
 
 ### CSS/JS missing after install
 
-Use the official **release zip** from [GitHub Releases](https://github.com/wontonee/layrshift/releases). Do not zip the plugin folder yourself — that often drops required CSS/JS files.
+Use the official **release zip** from [layrshift-1.0.6.zip](https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-1.0.6.zip). Do not zip the plugin folder yourself — that often drops required CSS/JS files.
 
 ### Composer / vendor errors
 
-If you installed from a release zip and still see a Composer message, the download may be incomplete. Delete the plugin folder and upload a fresh copy from Releases.
+If you installed from a release zip and still see a Composer message, the download may be incomplete. Delete the plugin folder and upload a fresh copy from the official download link.
 
 ---
 
@@ -480,7 +481,7 @@ LayrShift also ships crash-recovery hooks to reduce white-screen risk during age
 
 ## Changelog
 
-See [readme.txt](readme.txt) for the full WordPress-style changelog, or [GitHub Releases](https://github.com/wontonee/layrshift/releases) for per-version notes.
+See [readme.txt](readme.txt) for the full WordPress-style changelog, or the [GitHub repository](https://github.com/wontonee/layrshift) for source and issues.
 
 **1.0.6** — Plugin Check / PHPCS compliance, admin escaping, GitHub distribution polish, Plugin Check ignore filters for local scans, release zip output moved to `../dist/`.
 
@@ -488,8 +489,10 @@ See [readme.txt](readme.txt) for the full WordPress-style changelog, or [GitHub 
 
 ## Support & contributing
 
+- **Download:** [layrshift-1.0.6.zip](https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-1.0.6.zip)
 - **Issues:** [github.com/wontonee/layrshift/issues](https://github.com/wontonee/layrshift/issues)
-- **Releases:** [github.com/wontonee/layrshift/releases](https://github.com/wontonee/layrshift/releases)
+- **Source:** [github.com/wontonee/layrshift](https://github.com/wontonee/layrshift)
+- **Support:** [dev@wontonee.com](mailto:dev@wontonee.com)
 - **Company:** [Wontonee DigitalCraft LLP](https://wontonee.com)
 
 Pull requests welcome. Contributors working from source: clone the repo and run `composer install` in the plugin directory. Please do not post application passwords or production site URLs in issues.
@@ -503,3 +506,7 @@ LayrShift is free software: you can redistribute it and/or modify it under the t
 LayrShift is distributed in the hope that it will be useful, but **WITHOUT ANY WARRANTY**; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See [GPL-2.0](https://www.gnu.org/licenses/gpl-2.0.html).
 
 Bundled [wordpress/mcp-adapter](https://github.com/WordPress/mcp-adapter) and other Composer dependencies are subject to their respective licenses.
+
+---
+
+Made with ❤️ by [Wontonee](https://wontonee.com)
