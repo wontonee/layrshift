@@ -1,13 +1,5 @@
 <p align="center">
-  <img src="assets/icon-256x256.png" alt="LayrShift icon" width="96" />
-</p>
-
-<p align="center">
-  <img src="assets/banner-772x250.png" alt="LayrShift — MCP server for WordPress dev and staging" width="772" />
-</p>
-
-<p align="center">
-  <a href="https://wontonee.com"><img src="assets/wontonee-logo.png" alt="Wontonee DigitalCraft LLP" height="36" /></a>
+  <img src="assets/banner-1544x500.png" alt="LayrShift — MCP server for WordPress dev and staging" width="100%" />
 </p>
 
 # LayrShift
@@ -520,11 +512,5 @@ LayrShift is distributed in the hope that it will be useful, but **WITHOUT ANY W
 Bundled [wordpress/mcp-adapter](https://github.com/WordPress/mcp-adapter) and other Composer dependencies are subject to their respective licenses.
 
 ---
-
-<p align="center">
-  <img src="assets/icon-256x256.png" alt="LayrShift" width="64" />
-  <br /><br />
-  <a href="https://wontonee.com"><img src="assets/wontonee-logo.png" alt="Wontonee DigitalCraft LLP" height="36" /></a>
-</p>
 
 <p align="center">Made with ❤️ by <a href="https://wontonee.com">Wontonee</a> · <a href="mailto:dev@wontonee.com">dev@wontonee.com</a></p>
