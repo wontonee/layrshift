@@ -5,8 +5,8 @@ Requires at least: 6.9
 Tested up to: 7.0
 Requires PHP: 8.0
 Stable tag: 1.0.6
-License: GPLv2 or later
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
+License: AGPL-3.0-or-later
+License URI: https://www.gnu.org/licenses/agpl-3.0.html
 
 Forge WordPress with your AI agent. MCP server for dev/staging sites.
 
@@ -24,7 +24,7 @@ LayrShift exposes a secure MCP (Model Context Protocol) server inside WordPress 
 
 Built on the official [WordPress MCP Adapter](https://github.com/WordPress/mcp-adapter) and Abilities API (WordPress 6.9+). Bundled Composer dependencies are included in the plugin package.
 
-The official release zip is hosted on S3. Clone the [GitHub repository](https://github.com/wontonee/layrshift) and run `composer install` for development; that tree additionally includes optional `execute-php` and WP-CLI abilities excluded from the release zip.
+The official package is published on [GitHub Releases](https://github.com/wontonee/layrshift/releases) (same model as [Novamira](https://github.com/use-novamira/novamira)). Mirror: https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-1.0.6.zip. Clone the repository and run `composer install` for development.
 
 == Security ==
 
@@ -43,7 +43,7 @@ Hardening included in this release:
 
 == Installation ==
 
-1. Download layrshift-x.y.z.zip from https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-1.0.6.zip (replace version in the filename as needed)
+1. Download `layrshift-x.y.z.zip` from [GitHub Releases](https://github.com/wontonee/layrshift/releases) or the [S3 mirror](https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-1.0.6.zip)
 2. In wp-admin: Plugins → Add New → Upload Plugin, install, and activate.
 3. Open **LayrShift → Configuration**.
 4. On the **Settings** tab, acknowledge the dev/staging warning and enable **AI Abilities**.
@@ -74,7 +74,7 @@ No. The release zip includes bundled dependencies.
 
 = Where do I download LayrShift? =
 
-LayrShift is not on the WordPress.org plugin directory. Download the latest layrshift-x.y.z.zip from https://wontonee-micro-services.s3.us-east-1.amazonaws.com/layrshift/layrshift-1.0.6.zip and install via Plugins → Add New → Upload Plugin.
+LayrShift is not on the WordPress.org plugin directory. Download the latest `layrshift-x.y.z.zip` from [GitHub Releases](https://github.com/wontonee/layrshift/releases) and install via Plugins → Add New → Upload Plugin.
 
 == Screenshots ==
 
