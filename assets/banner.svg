@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1544" height="500" viewBox="0 0 1544 500" role="img" aria-label="LayrShift  MCP server for WordPress dev and staging">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4f6cf7"/>
+      <stop offset="55%" stop-color="#3b5bdb"/>
+      <stop offset="100%" stop-color="#1e2b5c"/>
+    </linearGradient>
+    <linearGradient id="icon-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2f3f9e"/>
+      <stop offset="100%" stop-color="#1a2560"/>
+    </linearGradient>
+  </defs>
+  <rect width="1544" height="500" fill="url(#bg)"/>
+  <g transform="translate(88 118)">
+    <rect x="0" y="0" width="132" height="132" rx="28" fill="url(#icon-bg)"/>
+    <rect x="22" y="22" width="40" height="40" rx="10" fill="#ffffff"/>
+    <rect x="70" y="22" width="40" height="40" rx="10" fill="#a5b4fc" opacity="0.95"/>
+    <rect x="22" y="70" width="40" height="40" rx="10" fill="#ffffff"/>
+    <rect x="70" y="70" width="40" height="40" rx="10" fill="#a5b4fc" opacity="0.95"/>
+  </g>
+  <text x="268" y="210" fill="#ffffff" font-family="system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="72" font-weight="700" letter-spacing="-1.5">LayrShift</text>
+  <text x="270" y="268" fill="#c7d2fe" font-family="system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="30" font-weight="400">MCP server for WordPress dev &amp; staging</text>
+</svg>
