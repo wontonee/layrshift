@@ -83,9 +83,25 @@ body.layrshift-admin .wrap.layrshift-app > h2:first-child {
 
 .layrshift-app__brand {
 	display: flex;
+	align-items: center;
+	gap: 12px;
+	flex-wrap: wrap;
+}
+
+.layrshift-app__icon {
+	display: block;
+	width: 40px;
+	height: 40px;
+	border-radius: 10px;
+	flex-shrink: 0;
+}
+
+.layrshift-app__brand-text {
+	display: flex;
 	align-items: baseline;
 	gap: 10px;
 	flex-wrap: wrap;
+	min-width: 0;
 }
 
 .layrshift-app__wordmark {

@@ -30,12 +30,21 @@ $tab_body_class = 'layrshift-tab-' . sanitize_html_class( $active_tab );
 	<header class="layrshift-app__header">
 		<div class="layrshift-app__top">
 			<div class="layrshift-app__brand">
+				<img
+					class="layrshift-app__icon"
+					src="<?php echo esc_url( LAYRSHIFT_URL . 'admin/assets/layrshift-icon.png' ); ?>"
+					width="40"
+					height="40"
+					alt=""
+				/>
+				<div class="layrshift-app__brand-text">
 				<span class="layrshift-app__wordmark"><?php esc_html_e( 'LayrShift', 'layrshift' ); ?></span>
 				<?php if ( 'dev' === $shell_mode && '' !== $dev_title ) : ?>
 					<span class="layrshift-app__context"><?php echo esc_html( $dev_title ); ?></span>
 				<?php elseif ( 'app' === $shell_mode ) : ?>
 					<span class="layrshift-app__tagline"><?php esc_html_e( 'Connect AI agents', 'layrshift' ); ?></span>
 				<?php endif; ?>
+				</div>
 			</div>
 			<?php if ( 'dev' === $shell_mode ) : ?>
 				<a class="layrshift-app__back" href="<?php echo esc_url( Admin::app_url( 'settings' ) ); ?>">

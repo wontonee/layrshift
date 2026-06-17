@@ -12,6 +12,12 @@ Forge WordPress with your AI agent. MCP server for dev/staging sites.
 
 == Description ==
 
+<p align="center"><img src="assets/icon-256x256.png" alt="LayrShift icon" width="96" /></p>
+
+<p align="center"><img src="assets/banner-772x250.png" alt="LayrShift" width="772" /></p>
+
+<p align="center"><a href="https://wontonee.com"><img src="assets/wontonee-logo.png" alt="Wontonee DigitalCraft LLP" height="36" /></a></p>
+
 LayrShift exposes a secure MCP (Model Context Protocol) server inside WordPress so AI clients like Cursor, Claude Code, and VS Code Copilot can:
 
 * Read, write, edit, and delete files under the site root (PHP writes are sandbox-only)
@@ -110,3 +116,9 @@ LayrShift is not on the WordPress.org plugin directory. Download the latest `lay
 * Optional integrations: Yoast SEO, Smush, VaultShift, BlogiBot (when those plugins are active).
 * Skills library, Abilities Hub, admin bar status chip, and MCP connection wizard.
 * Compact MCP tool names for Cursor and other clients with strict name-length limits.
+
+<p align="center"><img src="assets/icon-256x256.png" alt="LayrShift" width="64" /></p>
+
+<p align="center"><a href="https://wontonee.com"><img src="assets/wontonee-logo.png" alt="Wontonee DigitalCraft LLP" height="36" /></a></p>
+
+<p align="center">Made with love by <a href="https://wontonee.com">Wontonee</a> · <a href="mailto:dev@wontonee.com">dev@wontonee.com</a></p>
