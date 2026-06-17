@@ -24,7 +24,7 @@ LayrShift exposes a secure MCP (Model Context Protocol) server inside WordPress 
 
 Built on the official [WordPress MCP Adapter](https://github.com/WordPress/mcp-adapter) and Abilities API (WordPress 6.9+). Bundled Composer dependencies are included in the plugin package.
 
-The [GitHub release](https://github.com/wontonee/layrshift) additionally includes optional `execute-php` and WP-CLI abilities for local development workflows.
+The [GitHub release](https://github.com/wontonee/layrshift/releases) is the standard package. Clone the repository and run `composer install` for development; that tree additionally includes optional `execute-php` and WP-CLI abilities excluded from the release zip.
 
 == Security ==
 
@@ -43,10 +43,13 @@ Hardening included in this release:
 
 == Installation ==
 
-1. Install and activate LayrShift from the WordPress plugin directory (or upload the plugin zip).
-2. In wp-admin, open **LayrShift → Configuration**.
-3. On the **Settings** tab, acknowledge the dev/staging warning and enable **AI Abilities**.
-4. Open the **MCP** tab, generate an application password, and connect your MCP client (Cursor, Claude Code, etc.).
+1. Download `layrshift-x.y.z.zip` from https://github.com/wontonee/layrshift/releases
+2. In wp-admin: Plugins → Add New → Upload Plugin, install, and activate.
+3. Open **LayrShift → Configuration**.
+4. On the **Settings** tab, acknowledge the dev/staging warning and enable **AI Abilities**.
+5. Open the **MCP** tab, generate an application password, and connect your MCP client (Cursor, Claude Code, etc.).
+
+For full documentation see README.md in the GitHub repository.
 
 == Frequently Asked Questions ==
 
@@ -67,7 +70,11 @@ Wordfence disables Application Passwords by default. Either:
 
 = Do I need to run Composer? =
 
-No. The WordPress.org package includes bundled dependencies.
+No. The release zip from GitHub includes bundled dependencies.
+
+= Where do I download LayrShift? =
+
+LayrShift is distributed on GitHub, not the WordPress.org plugin directory. Download the latest `layrshift-x.y.z.zip` from https://github.com/wontonee/layrshift/releases and install via Plugins → Add New → Upload Plugin.
 
 == Screenshots ==
 
