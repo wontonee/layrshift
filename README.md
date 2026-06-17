@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/banner.svg" alt="LayrShift — MCP server for WordPress dev and staging" width="100%" />
+  <img src="assets/banner-1544x500.png" alt="LayrShift — MCP server for WordPress dev and staging" width="100%" />
 </p>
 
 # LayrShift

@@ -12,11 +12,7 @@ Forge WordPress with your AI agent. MCP server for dev/staging sites.
 
 == Description ==
 
-<p align="center"><img src="assets/icon-256x256.png" alt="LayrShift icon" width="96" /></p>
-
-<p align="center"><img src="assets/banner-772x250.png" alt="LayrShift" width="772" /></p>
-
-<p align="center"><a href="https://wontonee.com"><img src="assets/wontonee-logo.png" alt="Wontonee DigitalCraft LLP" height="36" /></a></p>
+<p align="center"><img src="assets/banner-1544x500.png" alt="LayrShift" width="100%" /></p>
 
 LayrShift exposes a secure MCP (Model Context Protocol) server inside WordPress so AI clients like Cursor, Claude Code, and VS Code Copilot can:
 
