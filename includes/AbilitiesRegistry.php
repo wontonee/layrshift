@@ -39,6 +39,7 @@ use LayrShift\Wordfence\Loader as WordfenceLoader;
 use LayrShift\WpFastestCache\Loader as WpFastestCacheLoader;
 use LayrShift\WpOptimize\Loader as WpOptimizeLoader;
 use LayrShift\WpRocket\Loader as WpRocketLoader;
+use LayrShift\PrismShift\Loader as PrismShiftLoader;
 use LayrShift\Yoast\Loader as YoastLoader;
 
 /**
@@ -66,6 +67,7 @@ final class AbilitiesRegistry {
 		}
 		GutenbergLoader::register_abilities();
 		ElementorLoader::register_abilities();
+		PrismShiftLoader::register_abilities();
 		YoastLoader::register_abilities();
 		SmushLoader::register_abilities();
 		VaultShiftLoader::register_abilities();
@@ -98,6 +100,7 @@ final class AbilitiesRegistry {
 			$wp_cli,
 			GutenbergLoader::ability_names(),
 			ElementorLoader::ability_names(),
+			PrismShiftLoader::ability_names(),
 			YoastLoader::ability_names(),
 			SmushLoader::ability_names(),
 			VaultShiftLoader::ability_names(),

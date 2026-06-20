@@ -21,6 +21,7 @@ final class AbilityCategories {
 	public const ADMIN_ACCESS  = 'layrshift-admin-access';
 	public const GUTENBERG     = 'layrshift-gutenberg';
 	public const ELEMENTOR     = 'layrshift-elementor';
+	public const PRISMSHIFT     = 'layrshift-prismshift';
 	public const YOAST         = 'layrshift-yoast';
 	public const SMUSH         = 'layrshift-smush';
 	public const VAULTSHIFT    = 'layrshift-vaultshift';
@@ -50,6 +51,7 @@ final class AbilityCategories {
 			'admin-access'  => self::ADMIN_ACCESS,
 			'gutenberg'     => self::GUTENBERG,
 			'elementor'     => self::ELEMENTOR,
+			'prismshift'    => self::PRISMSHIFT,
 			'yoast'         => self::YOAST,
 			'smush'         => self::SMUSH,
 			'vaultshift'    => self::VAULTSHIFT,

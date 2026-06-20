@@ -76,6 +76,10 @@ final class McpBootstrap {
 				'label'       => __( 'Elementor', 'layrshift' ),
 				'description' => __( 'Read and save Elementor documents via the Elementor API.', 'layrshift' ),
 			),
+						AbilityCategories::PRISMSHIFT     => array(
+				'label'       => __( 'PrismShift', 'layrshift' ),
+				'description' => __( 'Read and update PrismShift SEO metadata and site settings.', 'layrshift' ),
+			),
 			AbilityCategories::YOAST          => array(
 				'label'       => __( 'Yoast SEO', 'layrshift' ),
 				'description' => __( 'Read and update Yoast SEO metadata and site settings.', 'layrshift' ),

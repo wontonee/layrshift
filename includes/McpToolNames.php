@@ -80,6 +80,7 @@ final class McpToolNames {
 			'layrshift-vaultshift-' => 'ls-vs-',
 			'layrshift-elementor-'  => 'ls-el-',
 			'layrshift-blogibot-'   => 'ls-bb-',
+			'layrshift-prismshift-' => 'ls-ps-',
 			'layrshift-yoast-'      => 'ls-yo-',
 			'layrshift-smush-'      => 'ls-sm-',
 			'layrshift-'            => 'ls-',
